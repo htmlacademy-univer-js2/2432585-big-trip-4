@@ -332,7 +332,7 @@ function createList() {
                   <span class="visually-hidden">Open event</span>
                 </button>
               </div>
-            </li>`
+            </li>`;
 }
 
 export default class List {

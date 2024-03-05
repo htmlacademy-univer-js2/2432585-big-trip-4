@@ -162,7 +162,7 @@ function createNewPoint(){
                 </section>
               </section>
             </form>
-            </li>`
+            </li>`;
 }
 
 export default class NewPoint {

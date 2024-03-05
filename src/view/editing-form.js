@@ -155,7 +155,7 @@ function createEditPiont() {
                 </section>
               </section>
             </form>
-          </li>`
+          </li>`;
 }
 
 export default class EditPoint {

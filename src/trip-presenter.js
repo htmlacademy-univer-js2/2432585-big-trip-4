@@ -1,5 +1,3 @@
-import Filter from './view/filter.js';
-import Sort from './view/sort.js';
 import NewPoint from './view/addition-new-point.js';
 import EditPoint from './view/editing-form.js';
 import List from './view/list.js';
