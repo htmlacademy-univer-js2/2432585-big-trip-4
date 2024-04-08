@@ -1,8 +1,13 @@
 import { createElement } from '../render.js';
-import { createListTemplate } from '../template/list-template.js';
-export default class ListView {
+import { createEditPointTemplate } from '../template/editing-form-template.js';
+
+export default class EditPointView {
+  constructor({point}) {
+    this.point = point;
+  }
+
   getTemplate() {
-    return createListTemplate();
+    return createEditPointTemplate(this.point);
   }
 
   getElement() {

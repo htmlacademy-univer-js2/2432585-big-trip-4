@@ -1,8 +1,9 @@
 import { createElement } from '../render.js';
-import { createListTemplate } from '../template/list-template.js';
-export default class ListView {
+import { createFilterTemplate } from '../template/filter-template.js';
+
+export default class FilterPointsView {
   getTemplate() {
-    return createListTemplate();
+    return createFilterTemplate();
   }
 
   getElement() {

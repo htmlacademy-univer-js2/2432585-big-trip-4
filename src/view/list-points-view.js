@@ -1,8 +1,13 @@
 import { createElement } from '../render.js';
-import { createListTemplate } from '../template/list-template.js';
-export default class ListView {
+import { createListPointsTemplate } from '../template/list-points-template.js'
+
+export default class ListPointsView {
+  constructor ({data}) {
+    this.point = data;
+  }
+
   getTemplate() {
-    return createListTemplate();
+    return createListPointsTemplate(this.point);
   }
 
   getElement() {
