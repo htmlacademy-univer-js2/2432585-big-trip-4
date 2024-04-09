@@ -1,8 +1,9 @@
 import { createElement } from '../render.js';
-import { createListTemplate } from '../template/list-template.js';
-export default class ListView {
+import { createTripInfoTemplate } from '../template/trip-info-template.js';
+
+export default class TripInfoView {
   getTemplate() {
-    return createListTemplate();
+    return createTripInfoTemplate();
   }
 
   getElement() {
