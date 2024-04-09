@@ -16,12 +16,12 @@ export default class OffersModel {
     return this.allOffers.find((offer) => offer.type === type);
   }
 
-  getById() {
+  /* getById() {
     return this.allOffers.forEach((element) => {
       const result = element.offers.find((offer) => offer.id === id);
       if (result) {
         return result;
       }
     });
-  }
+  } */
 }
