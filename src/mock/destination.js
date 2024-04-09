@@ -1,5 +1,5 @@
-import { getRandomArrayElement } from "../utils";
-import { DESTINATION, DESCRIPTION } from "../const";
+import { getRandomArrayElement } from '../utils';
+import { DESTINATION, DESCRIPTION } from '../const';
 
 function getRandomDestination() {
   const sity = getRandomArrayElement(DESTINATION);

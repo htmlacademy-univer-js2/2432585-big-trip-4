@@ -1,6 +1,6 @@
-import { generateOffer } from "../mock/offer";
-import { OFFERS_COUNT, OFFERS } from "../const";
-import { getRandomValue } from "../utils";
+import { generateOffer } from '../mock/offer';
+import { OFFERS_COUNT, OFFERS } from '../const';
+import { getRandomValue } from '../utils';
 
 export default class OffersModel {
   allOffers = OFFERS.map((type) => ({
@@ -23,6 +23,5 @@ export default class OffersModel {
         return result;
       }
     });
-    return {};
   }
 }

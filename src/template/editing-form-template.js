@@ -1,5 +1,5 @@
-import { POINT_TYPE, DESTINATION, OFFERS } from "../const";
-import { getRandomValue, formatFullDate } from "../utils";
+import { POINT_TYPE, OFFERS } from '../const';
+import { getRandomValue, formatFullDate } from '../utils';
 
 function createEditPointTemplate(point) {
   return `<li class="trip-events__item">

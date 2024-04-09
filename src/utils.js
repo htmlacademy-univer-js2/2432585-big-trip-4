@@ -1,4 +1,4 @@
-import dayjs from "dayjs";
+import dayjs from 'dayjs';
 
 function getRandomArrayElement(items) {
   return items[Math.floor(Math.random() * items.length)];
@@ -9,19 +9,19 @@ function getRandomValue(lower = 0, upper = 1000) {
 }
 
 function formatStringToDateTime(date) {
-  return dayjs(date).format('YYYY-MM-DDTHH:mm')
+  return dayjs(date).format('YYYY-MM-DDTHH:mm');
 }
 
 function formatFullDate(date) {
-  return dayjs(date).format('DD/MM/YY hh:mm')
+  return dayjs(date).format('DD/MM/YY hh:mm');
 }
 
 function formatStringToShortDate(date) {
-  return dayjs(date).format('MMM DD')
+  return dayjs(date).format('MMM DD');
 }
 
 function formatStringToTime(date) {
-  return dayjs(date).format('HH:mm')
+  return dayjs(date).format('HH:mm');
 }
 
 const periodsTime = {
@@ -37,7 +37,7 @@ function getDateDiff(dateFrom, dateTo) {
   if (diff > periodsTime.MINS_IN_HOUR) {
     return `${Math.ceil(diff / periodsTime.MINS_IN_HOUR)} H`;
   } else if (diff > periodsTime.HOURS_IN_DAY) {
-    return `${Math.ceil(diff / periodsTime.MINS_IN_DAY)} D`
+    return `${Math.ceil(diff / periodsTime.MINS_IN_DAY)} D`;
   }
 
   return `${Math.ceil(diff)} M`;

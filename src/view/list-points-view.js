@@ -1,5 +1,5 @@
 import { createElement } from '../render.js';
-import { createListPointsTemplate } from '../template/list-points-template.js'
+import { createListPointsTemplate } from '../template/list-points-template.js';
 
 export default class ListPointsView {
   constructor ({data}) {
