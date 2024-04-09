@@ -1,4 +1,4 @@
-import { POINT_TYPE,  OFFERS } from '../const';
+import { POINT_TYPE, OFFERS } from '../const';
 import { getRandomValue, formatFullDate } from '../utils';
 
 function createNewPointTemplate(point){
