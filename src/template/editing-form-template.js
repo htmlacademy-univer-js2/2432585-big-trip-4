@@ -2,7 +2,7 @@ import { POINT_TYPE, OFFERS } from '../const';
 import { formatFullDate } from '../utils/day';
 import { getRandomValue } from '../utils/common';
 
-function createEditPointTemplate(point, pointDestinations, pointOffers) {
+function createEditPointTemplate({point}) {
   return `<li class="trip-events__item">
             <form class="event event--edit" action="#" method="post">
               <header class="event__header">
