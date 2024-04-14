@@ -1,11 +1,10 @@
-import NewPointView from '../view/additional-new-point-view.js';
 import EditPointView from '../view/editing-form-view.js';
 import ListPointsView from '../view/list-points-view.js';
 import ListView from '../view/list-view.js';
 import {render, replace} from '../framework/render.js';
 
 export default class TripPresenter {
-  point = null
+  point = null;
   #listComponent = new ListView();
 
   #listContainer = null;
@@ -35,6 +34,14 @@ export default class TripPresenter {
   }
 
   #renderPoint(point) {
+    const escKeyDown = (evt) => {
+      if (evt.key === 'Escape') {
+        evt.preventDefault();
+        replaceEditToPoint();
+        document.removeEventListener('keydown', escKeyDown);
+      }
+    };
+
     const pointComponent = new ListPointsView ({
       data: point,
       onEditClick: () => {
@@ -44,14 +51,6 @@ export default class TripPresenter {
     });
 
     render(pointComponent, this.#listComponent.element);
-
-    const escKeyDown = (evt) => {
-      if (evt.key === 'Escape') {
-        evt.preventDefault();
-        replaceEditToPoint();
-        document.removeEventListener('keydown', escKeyDown);
-      }
-    };
 
     const editingForm = new EditPointView({
       point: point,
@@ -65,14 +64,14 @@ export default class TripPresenter {
         replaceEditToPoint(),
         document.removeEventListener('keydown', escKeyDown);
       }
-    })
+    });
 
     function replaceEditToPoint() {
       replace(pointComponent, editingForm);
     }
 
     function replacePointToEdit() {
-      replace(editingForm, pointComponent)
+      replace(editingForm, pointComponent);
     }
   }
 

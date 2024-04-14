@@ -1,4 +1,4 @@
-import { formatStringToDateTime, formatStringToShortDate, formatStringToTime, getDateDiff } from '../utils/utils';
+import { formatStringToDateTime, formatStringToShortDate, formatStringToTime, getDateDiff } from '../utils/day';
 
 function createOffers(offers) {
   return offers ? offers.map((offer) =>

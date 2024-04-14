@@ -9,7 +9,7 @@ export default class DestinationModel {
   }
 
   getDestinationByType(type) {
-    const destination = this.#destinations.find((destination) => destination.type === type);
+    const destination = this.#destinations.find((dest) => dest.type === type);
 
     if (destination) {
       return destination.destinations;

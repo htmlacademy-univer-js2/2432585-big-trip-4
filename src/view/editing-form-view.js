@@ -37,10 +37,10 @@ export default class EditPointView extends AbstractView {
   #formSubmitHandler = (evt) => {
     evt.preventDefalt();
     this.#onSubmitClick;
-  }
+  };
 
   #resetButtonClickHandler = (evt) => {
     evt.preventDefalt();
     this.#onResetClick;
-  }
+  };
 }
