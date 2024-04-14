@@ -1,13 +1,4 @@
 import dayjs from 'dayjs';
-
-function getRandomArrayElement(items) {
-  return items[Math.floor(Math.random() * items.length)];
-}
-
-function getRandomValue(lower = 0, upper = 1000) {
-  return Math.round((upper - lower) * Math.random() + lower);
-}
-
 function formatStringToDateTime(date) {
   return dayjs(date).format('YYYY-MM-DDTHH:mm');
 }
@@ -43,4 +34,4 @@ function getDateDiff(dateFrom, dateTo) {
   return `${Math.ceil(diff)} M`;
 }
 
-export {getRandomArrayElement, getRandomValue, formatStringToDateTime, formatStringToShortDate, formatStringToTime, formatFullDate, getDateDiff};
+export {formatStringToDateTime, formatStringToShortDate, formatStringToTime, formatFullDate, getDateDiff};

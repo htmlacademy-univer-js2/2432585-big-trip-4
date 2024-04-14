@@ -3,7 +3,7 @@ import TripInfoView from './view/trip-info-view.js';
 import SortPointsView from './view/sort-points-view.js';
 import TripPresenter from './presenter/trip-presenter.js';
 
-import {RenderPosition, render} from './render.js';
+import {render, RenderPosition} from './framework/render.js';
 
 import PointsModel from './model/point-model.js';
 import DestinationModel from './model/destination-model.js';
