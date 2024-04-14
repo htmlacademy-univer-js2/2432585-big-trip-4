@@ -33,7 +33,7 @@ export default class TripPresenter {
 
     render(this.#listComponent,this.#listContainer);
 
-    this.#tripPoint.forEach(point => {
+    this.#tripPoint.forEach((point) => {
       this.#renderPoint(point);
     });
   }
@@ -78,9 +78,9 @@ export default class TripPresenter {
 
     function pointSubmitHandler() {
       replaceEditToPoint();
-        document.removeEventListener('keydown', escKeyDown);
+      document.removeEventListener('keydown', escKeyDown);
     }
 
-    render(pointComponent, this.#listComponent.element)
+    render(pointComponent, this.#listComponent.element);
   }
 }
