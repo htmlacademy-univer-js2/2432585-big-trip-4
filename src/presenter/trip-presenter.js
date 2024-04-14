@@ -61,7 +61,7 @@ export default class TripPresenter {
         document.removeEventListener('keydown', escKeyDown);
       },
       onResetClick: () => {
-        replaceEditToPoint(),
+        replaceEditToPoint();
         document.removeEventListener('keydown', escKeyDown);
       }
     });
@@ -74,6 +74,4 @@ export default class TripPresenter {
       replace(editingForm, pointComponent);
     }
   }
-
-  /* editComponent = new EditPointView({point: point}); */
 }

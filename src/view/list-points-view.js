@@ -30,6 +30,6 @@ export default class ListPointsView extends AbstractView {
 
   #editButtonClickHandler = (evt) => {
     evt.preventDefault();
-    this.#onEditClick;
-  }
+    this.#onEditClick();
+  };
 }
