@@ -9,11 +9,11 @@ export default class EditPointView extends AbstractView {
   #onResetClick = null;
   #onSubmitClick = null;
 
-  constructor({point = POINT_EMPTY, onResetClick, onSubmitClick}) {
+  constructor({point = POINT_EMPTY, pointDestinations, pointOffers, onResetClick, onSubmitClick}) {
     super();
     this.#point = point;
-    /* this.#pointDestinations = pointDestinations;
-    this.#pointOffers = pointOffers; */
+    this.#pointDestinations = pointDestinations;
+    this.#pointOffers = pointOffers;
     this.#onResetClick = onResetClick;
     this.#onSubmitClick = onSubmitClick;
 

@@ -9,6 +9,8 @@ import PointsModel from './model/point-model.js';
 import DestinationModel from './model/destination-model.js';
 import OffersModel from './model/offer-model.js';
 
+import { generateFilters } from './mock/filter.js';
+
 
 const filterHeaderElement = document.querySelector('.trip-controls');
 const siteFilterElement = filterHeaderElement.querySelector('.trip-controls__filters');
@@ -28,8 +30,10 @@ const tripPresenter = new TripPresenter({
   pointsModel
 });
 
+const filters = generateFilters(pointsModel.points);
+
 render(new SortPointsView(), siteSortElement);
-render(new FilterPointsView(), siteFilterElement);
+render(new FilterPointsView({filters}), siteFilterElement);
 render(new TripInfoView(), tripInfoElement, RenderPosition.AFTERBEGIN);
 
 tripPresenter.init();
