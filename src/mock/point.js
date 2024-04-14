@@ -1,8 +1,7 @@
-import { getRandomArrayElement, getRandomValue } from '../utils.js';
+import { getRandomArrayElement, getRandomValue } from '../utils/common.js';
 import { POINT_TYPE } from '../const.js';
 
 function generatePoint(destinationId, offersIds) {
-
   return {
     id: crypto.randomUUID(),
     basePrice: getRandomValue(),

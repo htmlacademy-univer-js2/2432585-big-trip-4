@@ -1,6 +1,18 @@
 const DESTINATION_COUNT = 5;
 const POINT_COUNT = 5;
 const OFFERS_COUNT = 5;
+const DEFAULT_TYPE = 'taxi';
+
+//пустая точка
+const POINT_EMPTY = {
+  basePrice: 0,
+  dateFrom: null,
+  dateTo: null,
+  destination: null,
+  isFavorite: false,
+  offers: [],
+  type: DEFAULT_TYPE
+};
 
 const POINT_TYPE = [
   'Taxi',
@@ -45,4 +57,4 @@ const OFFERS = [
   'Travel by train',
 ];
 
-export {POINT_TYPE, DESTINATION, DESCRIPTION, OFFERS, DESTINATION_COUNT, OFFERS_COUNT, POINT_COUNT};
+export {POINT_EMPTY, POINT_TYPE, DESTINATION, DESCRIPTION, OFFERS, DESTINATION_COUNT, OFFERS_COUNT, POINT_COUNT};

@@ -1,5 +1,6 @@
 import { POINT_TYPE, OFFERS } from '../const';
-import { getRandomValue, formatFullDate } from '../utils';
+import { formatFullDate } from '../utils/day';
+import { getRandomValue } from '../utils/common';
 
 function createNewPointTemplate(point){
   return `<li class="trip-events__item">
