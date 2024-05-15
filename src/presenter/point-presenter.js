@@ -1,6 +1,7 @@
 import { remove, render, replace } from "../framework/render";
 import ListPointsView from "../view/list-points-view";
 import EditPointView from "../view/editing-form-view";
+import DestinationModel from "../model/destination-model";
 
 export default class PointPresenter {
   #pointListContainer = null;
@@ -26,8 +27,8 @@ export default class PointPresenter {
     const prevPointEditComponent = this.#pointEditComponent;
 
     this.#pointComponent = new ListPointsView({
-      data: this.#point,
-      destinations: this.#destinationsModel.getDestinationById(point.destinations),
+      point: this.#point,
+      destination: this.#destinationsModel.getDestinationById(point.destination),
       offers: this.#offersModel.getOffersByType(point.type),
       onEditClick: pointEditClickHandler
     })

@@ -4,14 +4,14 @@ import { POINT_EMPTY } from '../const.js';
 
 export default class ListPointsView extends AbstractView {
   #point = null;
-  #destinations = null;
+  #destination = null;
   #offers = null;
   #onEditClick = null;
 
-  constructor ({data = POINT_EMPTY, destinations, offers, onEditClick}) {
+  constructor ({point = POINT_EMPTY, destination, offers, onEditClick}) {
     super();
-    this.#point = data;
-    this.#destinations = destinations;
+    this.#point = point;
+    this.#destination = destination;
     this.#offers = offers;
     this.#onEditClick = onEditClick;
 
@@ -23,7 +23,7 @@ export default class ListPointsView extends AbstractView {
   get template() {
     return createListPointsTemplate({
       point: this.#point,
-      destinations: this.#destinations,
+      destination: this.#destination,
       offers: this.#offers
     });
   }
