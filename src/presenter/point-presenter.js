@@ -1,7 +1,6 @@
-import { remove, render, replace } from "../framework/render";
-import ListPointsView from "../view/list-points-view";
-import EditPointView from "../view/editing-form-view";
-import DestinationModel from "../model/destination-model";
+import { remove, render, replace } from '../framework/render';
+import ListPointsView from '../view/list-points-view';
+import EditPointView from '../view/editing-form-view';
 
 const Mode = {
   DEFAULT: 'DEFAULT',
@@ -24,7 +23,7 @@ export default class PointPresenter {
   #mode = Mode.DEFAULT;
 
   constructor({ pointListContainer, destinationsModel, offersModel, onDataChange, onModeChange }) {
-    console.log('PointPresenter constructor:', { pointListContainer, destinationsModel, offersModel });
+    /* console.log('PointPresenter constructor:', { pointListContainer, destinationsModel, offersModel }); */
 
     if (!pointListContainer || !pointListContainer instanceof Element) {
       throw new Error('Invalid pointListContainer or its element');
@@ -43,8 +42,8 @@ export default class PointPresenter {
     const prevPointComponent = this.#pointComponent;
     const prevPointEditComponent = this.#pointEditComponent;
 
-    console.log('Init point:', point);
-    console.log('Destinations Model:', this.#destinationsModel);
+    /* console.log('Init point:', point);
+    console.log('Destinations Model:', this.#destinationsModel); */
 
     this.#pointComponent = new ListPointsView({
       point: this.#point,
@@ -68,7 +67,7 @@ export default class PointPresenter {
     }
 
     if (this.#mode === Mode.DEFAULT) {
-      replace(this.#pointComponent, prevPointComponent)
+      replace(this.#pointComponent, prevPointComponent);
     }
     if (this.#mode === Mode.EDITING) {
       replace(this.#pointEditComponent, prevPointEditComponent);
@@ -76,7 +75,7 @@ export default class PointPresenter {
 
     remove(prevPointComponent);
     remove(prevPointEditComponent);
-    console.log('Rendering point component to:', this.#pointListContainer);
+    /* console.log('Rendering point component to:', this.#pointListContainer); */
   }
 
   destroy() {
@@ -95,7 +94,7 @@ export default class PointPresenter {
       evt.preventDefault();
       this.#replaceEditToPoint();
     }
-  }
+  };
 
   #replacePointToEdit() {
     replace(this.#pointEditComponent, this.#pointComponent);
@@ -114,17 +113,17 @@ export default class PointPresenter {
   #handleFormSubmit = (point) => {
     this.#handleDataChange(point);
     this.#replaceEditToPoint();
-  }
+  };
 
   #pointEditClickHandler = () => {
     this.#replacePointToEdit();
-  }
+  };
 
   #resetButtonClickHandler = () => {
-    replaceEditToPoint();
-  }
+    this.#replaceEditToPoint();
+  };
 
   #pointFavoriteHandler = () => {
     this.#handleDataChange({...this.#point, isFavorite: !this.#point.isFavorite})
-  }
+  };
 }

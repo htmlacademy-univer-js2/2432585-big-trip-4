@@ -42,5 +42,5 @@ export default class ListPointsView extends AbstractView {
   #favoriteButtonClickHandler = (evt) => {
     evt.preventDefault();
     this.#onFavoriteClick();
-  }
+  };
 }

@@ -1,10 +1,8 @@
 import ListView from '../view/list-view.js';
 import EventListEmptyView from '../view/event-list-empty-view.js';
-import { render, remove } from '../framework/render.js';
+import { render } from '../framework/render.js';
 import PointPresenter from './point-presenter.js';
 import { updateItem } from '../utils/common.js';
-import DestinationModel from '../model/destination-model.js';
-import OffersModel from '../model/offer-model.js';
 
 export default class TripPresenter {
   #listComponent = new ListView();
@@ -52,11 +50,11 @@ export default class TripPresenter {
     this.#tripPoint.forEach((point) => {
       this.#renderPoint(point);
     });
-  }
+  };
 
   #renderPointContainer = () => {
     render(this.#listComponent, this.#listContainer);
-  }
+  };
 
   #renderBoard = () => {
     console.log('Rendering board');
@@ -67,7 +65,7 @@ export default class TripPresenter {
 
     this.#renderPointContainer();
     this.#renderPoints();
-  }
+  };
 
   #clearPointsList() {
     this.#pointPresenters.forEach((presenter) => presenter.destroy());
@@ -76,10 +74,10 @@ export default class TripPresenter {
 
   #handleModeChange = () => {
     this.#pointPresenters.forEach((presenter) => presenter.resetView());
-  }
+  };
 
   #handlePointChange = (updatePoint) => {
     this.#tripPoint = updateItem(this.#tripPoint, updatePoint);
     this.#pointPresenters.get(updatePoint.id).init(updatePoint);
-  }
+  };
 }
