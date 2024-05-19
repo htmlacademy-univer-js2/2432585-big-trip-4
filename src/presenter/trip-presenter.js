@@ -57,7 +57,7 @@ export default class TripPresenter {
   };
 
   #renderBoard = () => {
-    console.log('Rendering board');
+    /* console.log('Rendering board'); */
     if (this.#tripPoint.length === 0) {
       render(new EventListEmptyView(), this.#listContainer);
       return;

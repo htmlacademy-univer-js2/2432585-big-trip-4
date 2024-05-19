@@ -25,10 +25,10 @@ export default class PointPresenter {
   constructor({ pointListContainer, destinationsModel, offersModel, onDataChange, onModeChange }) {
     /* console.log('PointPresenter constructor:', { pointListContainer, destinationsModel, offersModel }); */
 
-    if (!pointListContainer || !pointListContainer instanceof Element) {
+    /* if (!pointListContainer || !pointListContainer instanceof Element) {
       throw new Error('Invalid pointListContainer or its element');
     }
-
+ */
     this.#pointListContainer = pointListContainer;
     this.#destinationsModel = destinationsModel;
     this.#offersModel = offersModel;
@@ -124,6 +124,6 @@ export default class PointPresenter {
   };
 
   #pointFavoriteHandler = () => {
-    this.#handleDataChange({...this.#point, isFavorite: !this.#point.isFavorite})
+    this.#handleDataChange({...this.#point, isFavorite: !this.#point.isFavorite});
   };
 }
