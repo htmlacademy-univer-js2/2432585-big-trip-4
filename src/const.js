@@ -76,12 +76,12 @@ const SortType = [{
 }]
 
 export {POINT_EMPTY,
-        POINT_TYPE, DESTINATION,
-        DESCRIPTION,
-        OFFERS,
-        DESTINATION_COUNT,
-        OFFERS_COUNT,
-        POINTS_COUNT,
-        FilterType,
-        Mode,
-        SortType};
+  POINT_TYPE, DESTINATION,
+  DESCRIPTION,
+  OFFERS,
+  DESTINATION_COUNT,
+  OFFERS_COUNT,
+  POINTS_COUNT,
+  FilterType,
+  Mode,
+  SortType};
