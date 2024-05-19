@@ -1,11 +1,11 @@
-import { generateOffer } from '../mock/offer';
+import { getRandomOffer } from '../mock/offer';
 import { OFFERS_COUNT, OFFERS } from '../const';
 import { getRandomValue } from '../utils/common';
 
 export default class OffersModel {
   #allOffers = OFFERS.map((type) => ({
     type,
-    offers: Array.from({ length: getRandomValue(0, OFFERS_COUNT) }, () => generateOffer())
+    offers: Array.from({ length: getRandomValue(0, OFFERS_COUNT) }, () => getRandomOffer())
   }));
 
   get allOffers() {

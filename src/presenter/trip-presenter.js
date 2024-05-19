@@ -1,8 +1,8 @@
-import EditPointView from '../view/editing-form-view.js';
-import ListPointsView from '../view/list-points-view.js';
 import ListView from '../view/list-view.js';
 import EventListEmptyView from '../view/event-list-empty-view.js';
-import {render, replace} from '../framework/render.js';
+import { render } from '../framework/render.js';
+import PointPresenter from './point-presenter.js';
+import { updateItem } from '../utils/common.js';
 
 export default class TripPresenter {
   #listComponent = new ListView();
@@ -14,7 +14,9 @@ export default class TripPresenter {
 
   #tripPoint = [];
 
-  constructor({listContainer, pointsModel, destinationsModel, offersModel}) {
+  #pointPresenters = new Map();
+
+  constructor({ listContainer, pointsModel, destinationsModel, offersModel }) {
     this.#listContainer = listContainer;
     this.#pointsModel = pointsModel;
     this.#destinationsModel = destinationsModel;
@@ -24,63 +26,58 @@ export default class TripPresenter {
   }
 
   init() {
+    this.#renderBoard();
+  }
+
+  #renderPoint(point) {
+    if (!this.#listComponent.element) {
+      throw new Error('List component element is not defined');
+    }
+
+    const pointPresenter = new PointPresenter({
+      pointListContainer: this.#listComponent.element,
+      onDataChange: this.#handlePointChange,
+      onModeChange: this.#handleModeChange,
+      destinationsModel: this.#destinationsModel,
+      offersModel: this.#offersModel
+    });
+
+    pointPresenter.init(point);
+    this.#pointPresenters.set(point.id, pointPresenter);
+  }
+
+  #renderPoints = () => {
+    this.#tripPoint.forEach((point) => {
+      this.#renderPoint(point);
+    });
+  };
+
+  #renderPointContainer = () => {
+    render(this.#listComponent, this.#listContainer);
+  };
+
+  #renderBoard = () => {
+    /* console.log('Rendering board'); */
     if (this.#tripPoint.length === 0) {
       render(new EventListEmptyView(), this.#listContainer);
       return;
     }
 
-    this.currentPoint = this.#pointsModel.points;
+    this.#renderPointContainer();
+    this.#renderPoints();
+  };
 
-    render(this.#listComponent,this.#listContainer);
-
-    this.#tripPoint.forEach((point) => {
-      this.#renderPoint(point);
-    });
+  #clearPointsList() {
+    this.#pointPresenters.forEach((presenter) => presenter.destroy());
+    this.#pointPresenters.clear();
   }
 
-  #renderPoint(point) {
-    const pointComponent = new ListPointsView ({
-      data: point,
-      onEditClick: pointEditClickHandler
-    });
+  #handleModeChange = () => {
+    this.#pointPresenters.forEach((presenter) => presenter.resetView());
+  };
 
-    const editingForm = new EditPointView({
-      point,
-      onSubmitClick: pointSubmitHandler,
-      onResetClick: resetButtonClickHandler
-    });
-
-    function replaceEditToPoint() {
-      replace(pointComponent, editingForm);
-    }
-
-    function replacePointToEdit() {
-      replace(editingForm, pointComponent);
-    }
-
-    const escKeyDown = (evt) => {
-      if (evt.key === 'Escape' || evt.key === 'Esc') {
-        evt.preventDefault();
-        replaceEditToPoint();
-        document.removeEventListener('keydown', escKeyDown);
-      }
-    };
-
-    function pointEditClickHandler() {
-      replacePointToEdit();
-      document.addEventListener('keydown', escKeyDown);
-    }
-
-    function resetButtonClickHandler() {
-      replaceEditToPoint();
-      document.removeEventListener('keydown', escKeyDown);
-    }
-
-    function pointSubmitHandler() {
-      replaceEditToPoint();
-      document.removeEventListener('keydown', escKeyDown);
-    }
-
-    render(pointComponent, this.#listComponent.element);
-  }
+  #handlePointChange = (updatePoint) => {
+    this.#tripPoint = updateItem(this.#tripPoint, updatePoint);
+    this.#pointPresenters.get(updatePoint.id).init(updatePoint);
+  };
 }

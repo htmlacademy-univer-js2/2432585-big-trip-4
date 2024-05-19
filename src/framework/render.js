@@ -31,7 +31,7 @@ function render(component, container, place = RenderPosition.BEFOREEND) {
     throw new Error('Can render only components');
   }
 
-  if (container === null) {
+  if (!container) {
     throw new Error('Container element doesn\'t exist');
   }
 
