@@ -64,4 +64,24 @@ const FilterType = [{
   PAST: 'past'
 }];
 
-export {POINT_EMPTY, POINT_TYPE, DESTINATION, DESCRIPTION, OFFERS, DESTINATION_COUNT, OFFERS_COUNT, POINTS_COUNT, FilterType};
+const Mode = {
+  DEFAULT: 'DEFAULT',
+  EDITING: 'EDITING',
+};
+
+const SortType = [{
+  DAY: 'day',
+  TIME: 'time',
+  PRICE: 'price'
+}]
+
+export {POINT_EMPTY,
+        POINT_TYPE, DESTINATION,
+        DESCRIPTION,
+        OFFERS,
+        DESTINATION_COUNT,
+        OFFERS_COUNT,
+        POINTS_COUNT,
+        FilterType,
+        Mode,
+        SortType};

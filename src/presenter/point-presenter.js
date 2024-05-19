@@ -1,11 +1,9 @@
 import { remove, render, replace } from '../framework/render';
+
 import ListPointsView from '../view/list-points-view';
 import EditPointView from '../view/editing-form-view';
 
-const Mode = {
-  DEFAULT: 'DEFAULT',
-  EDITING: 'EDITING',
-};
+import { Mode } from '../const';
 
 export default class PointPresenter {
   #pointListContainer = null;
