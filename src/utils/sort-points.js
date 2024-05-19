@@ -1,21 +1,32 @@
-import dayjs from "dayjs";
+import dayjs from 'dayjs';
 
 function sortPointsByDay(pointA, pointB) {
-    return dayjs(pointA.dateFrom).diff(dayjs(pointB.dateFrom));
+  return dayjs(pointA.dateFrom).diff(dayjs(pointB.dateFrom));
 }
 
 function sortPointsByTime(pointA, pointB) {
-  const durationA = getDurationNF(pointA.dateFrom, pointA.dateTo);
-  const durationB = getDurationNF(pointB.dateFrom, pointB.dateTo);
+  const durationA = dayjs.duration(dayjs(pointA.dateTo).diff(dayjs(pointA.dateFrom), 'minute'));
+  const durationB = dayjs.duration(dayjs(pointB.dateTo).diff(dayjs(pointB.dateFrom), 'minute'));
 
-  return (durationA.asMilliseconds() > durationB.asMilliseconds()) ? -1
-        : ((durationA.asMilliseconds() < durationB.asMilliseconds()) ? 1 : 0);
+  if (durationA.asMilliseconds() > durationB.asMilliseconds()) {
+    return -1;
+  } else if (durationA.asMilliseconds() < durationB.asMilliseconds()) {
+    return 1;
+  } else {
+    return 0;
+  }
 }
 
 function sortPointsByPrice(pointA, pointB){
   const diff = pointA.basePrice - pointB.basePrice;
 
-  return (diff > 0) ? -1 : ((diff < 0) ? 1 : 0);
+  if (diff > 0) {
+    return -1;
+  } else if (diff < 0) {
+    return 1;
+  } else {
+    return 0;
+  }
 }
 
 export {sortPointsByPrice, sortPointsByTime, sortPointsByDay};

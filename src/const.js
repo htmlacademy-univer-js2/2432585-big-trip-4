@@ -73,7 +73,7 @@ const SortType = [{
   DAY: 'day',
   TIME: 'time',
   PRICE: 'price'
-}]
+}];
 
 export {POINT_EMPTY,
   POINT_TYPE, DESTINATION,
