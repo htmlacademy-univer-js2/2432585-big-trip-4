@@ -6,15 +6,21 @@ import DestinationModel from "../model/destination-model";
 export default class PointPresenter {
   #pointListContainer = null;
 
-  #pointComponent = null;
-  #pointEditComponent = null;
+  #pointComponent;
+  #pointEditComponent;
 
   #destinationsModel = null;
   #offersModel = null;
 
   #point = null;
 
-  constructor({pointListContainer, destinationsModel, offersModel}) {
+  constructor({ pointListContainer, destinationsModel, offersModel }) {
+    console.log('PointPresenter constructor:', { pointListContainer, destinationsModel, offersModel });
+
+    if (!pointListContainer || !pointListContainer instanceof Element) {
+      throw new Error('Invalid pointListContainer or its element');
+    }
+
     this.#pointListContainer = pointListContainer;
     this.#destinationsModel = destinationsModel;
     this.#offersModel = offersModel;
@@ -26,20 +32,29 @@ export default class PointPresenter {
     const prevPointComponent = this.#pointComponent;
     const prevPointEditComponent = this.#pointEditComponent;
 
+    console.log('Init point:', point);
+    console.log('Destinations Model:', this.#destinationsModel);
+
     this.#pointComponent = new ListPointsView({
       point: this.#point,
       destination: this.#destinationsModel.getDestinationById(point.destination),
       offers: this.#offersModel.getOffersByType(point.type),
-      onEditClick: pointEditClickHandler
-    })
+      onEditClick: pointEditClickHandler,
+      /* onFavoriteClick: */
+    });
 
     this.#pointEditComponent = new EditPointView({
       point: this.#point,
-      pointDestinations: this.#destinationsModel.get(),
-      pointOffers: this.#offersModel.get(),
+      pointDestinations: this.#destinationsModel.destinations,
+      pointOffers: this.#offersModel.allOffers,
       onResetClick: resetButtonClickHandler,
       onSubmitClick: pointSubmitHandler
-    })
+    });
+
+    if (!prevPointComponent || !prevPointEditComponent) {
+      render(this.#pointComponent, this.#pointListContainer);
+      return;
+    }
 
     function replaceEditToPoint() {
       replace(prevPointComponent, prevPointEditComponent);
@@ -72,6 +87,16 @@ export default class PointPresenter {
       document.removeEventListener('keydown', escKeyDown);
     }
 
-    /* render(pointComponent, this.#pointListContainer.element); */
+    /* function pointFavoriteHandler() {
+
+    } */
+
+    console.log('Rendering point component to:', this.#pointListContainer);
+    render(this.#pointComponent, this.#pointListContainer);
+  }
+
+  destroy() {
+    remove(this.#pointComponent);
+    remove(this.#pointEditComponent);
   }
 }

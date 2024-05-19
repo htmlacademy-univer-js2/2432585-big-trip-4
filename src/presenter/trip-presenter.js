@@ -1,7 +1,9 @@
 import ListView from '../view/list-view.js';
 import EventListEmptyView from '../view/event-list-empty-view.js';
-import {render, remove} from '../framework/render.js';
+import { render, remove } from '../framework/render.js';
 import PointPresenter from './point-presenter.js';
+import DestinationModel from '../model/destination-model.js';
+import OffersModel from '../model/offer-model.js';
 
 export default class TripPresenter {
   #listComponent = new ListView();
@@ -13,7 +15,9 @@ export default class TripPresenter {
 
   #tripPoint = [];
 
-  constructor({listContainer, pointsModel, destinationsModel, offersModel}) {
+  #pointPresenters = new Map();
+
+  constructor({ listContainer, pointsModel, destinationsModel, offersModel }) {
     this.#listContainer = listContainer;
     this.#pointsModel = pointsModel;
     this.#destinationsModel = destinationsModel;
@@ -27,26 +31,32 @@ export default class TripPresenter {
   }
 
   #renderPoint(point) {
+    if (!this.#listComponent.element) {
+      throw new Error('List component element is not defined');
+    }
+
     const pointPresenter = new PointPresenter({
       pointListContainer: this.#listComponent.element,
+      destinationsModel: this.#destinationsModel,
+      offersModel: this.#offersModel
     });
 
     pointPresenter.init(point);
-  };
+    this.#pointPresenters.set(point.id, pointPresenter);
+  }
 
   #renderPoints = () => {
     this.#tripPoint.forEach((point) => {
       this.#renderPoint(point);
     });
-  };
+  }
 
   #renderPointContainer = () => {
-    this.currentPoint = this.#pointsModel.points;
-
-    render(this.#listComponent,this.#listContainer);
+    render(this.#listComponent, this.#listContainer);
   }
 
   #renderBoard = () => {
+    console.log('Rendering board');
     if (this.#tripPoint.length === 0) {
       render(new EventListEmptyView(), this.#listContainer);
       return;
@@ -54,5 +64,10 @@ export default class TripPresenter {
 
     this.#renderPointContainer();
     this.#renderPoints();
-  };
+  }
+
+  #clearPointsList() {
+    this.#pointPresenters.forEach((presenter) => presenter.destroy());
+    this.#pointPresenters.clear();
+  }
 }

@@ -126,7 +126,7 @@ function getRandomDestination() {
 }
 
 function getAllDestinations() {
-  destinations;
+  return destinations;
 }
 
 export {getRandomDestination, getAllDestinations};

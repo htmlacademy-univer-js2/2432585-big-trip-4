@@ -41,6 +41,6 @@ export default class EditPointView extends AbstractView {
 
   #resetButtonClickHandler = (evt) => {
     evt.preventDefalt();
-    this.#onResetClick();
+    this.#onResetClick(this.#point);
   };
 }
