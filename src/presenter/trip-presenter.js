@@ -2,6 +2,7 @@ import ListView from '../view/list-view.js';
 import EventListEmptyView from '../view/event-list-empty-view.js';
 import { render, remove } from '../framework/render.js';
 import PointPresenter from './point-presenter.js';
+import { updateItem } from '../utils/common.js';
 import DestinationModel from '../model/destination-model.js';
 import OffersModel from '../model/offer-model.js';
 
@@ -37,6 +38,8 @@ export default class TripPresenter {
 
     const pointPresenter = new PointPresenter({
       pointListContainer: this.#listComponent.element,
+      onDataChange: this.#handlePointChange,
+      onModeChange: this.#handleModeChange,
       destinationsModel: this.#destinationsModel,
       offersModel: this.#offersModel
     });
@@ -69,5 +72,14 @@ export default class TripPresenter {
   #clearPointsList() {
     this.#pointPresenters.forEach((presenter) => presenter.destroy());
     this.#pointPresenters.clear();
+  }
+
+  #handleModeChange = () => {
+    this.#pointPresenters.forEach((presenter) => presenter.resetView());
+  }
+
+  #handlePointChange = (updatePoint) => {
+    this.#tripPoint = updateItem(this.#tripPoint, updatePoint);
+    this.#pointPresenters.get(updatePoint.id).init(updatePoint);
   }
 }
