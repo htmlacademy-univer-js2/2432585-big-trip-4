@@ -17,7 +17,7 @@ function createPointOffer() {
                         &plus;&euro;&nbsp;
                         <span class="event__offer-price">${getRandomValue()}</span>
                       </label>
-                    </div>`).join('')
+                    </div>`).join('');
 }
 
 function createEditPointTemplate({point}) {

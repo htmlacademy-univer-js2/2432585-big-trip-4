@@ -86,7 +86,7 @@ export default class EditPointView extends AbstractStatefulView {
   #offerChangeHandler = (evt) => {
     evt.preventDefalt();
 
-    const  checkedOffers = Array.from(this.element.querySelectorAll('.event__offer-checkbox:checked'));
+    const checkedOffers = Array.from(this.element.querySelectorAll('.event__offer-checkbox:checked'));
     this._setState({
       point: {
         ...this._state.point,
@@ -120,5 +120,5 @@ export default class EditPointView extends AbstractStatefulView {
   };
 
   static parsePointToState = (point) => ({point});
-  static parseStateToPoint  = (state) => ({...state});
+  static parseStateToPoint = (state) => ({...state});
 }
