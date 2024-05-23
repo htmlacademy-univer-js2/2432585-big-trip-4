@@ -101,7 +101,7 @@ export default class EditPointView extends AbstractStatefulView {
     });
   };
 
-  #offerChangeHandler = (evt) => {
+  #offerChangeHandler = () => {
     const checkedOffers = Array.from(this.element.querySelectorAll('.event__offer-checkbox:checked'));
     this._setState({
       point: {
