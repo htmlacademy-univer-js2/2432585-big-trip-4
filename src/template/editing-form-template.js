@@ -2,6 +2,24 @@ import { POINT_TYPE, OFFERS } from '../const';
 import { formatFullDate } from '../utils/day';
 import { getRandomValue } from '../utils/common';
 
+function createPointType() {
+  return POINT_TYPE.map((type) => `<div class="event__type-item">
+  <input id="event-type-${type.toLowerCase()}-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="${type.toLowerCase()}">
+  <label class="event__type-label  event__type-label--${type.toLowerCase()}" for="event-type-${type.toLowerCase()}-1">${type}</label>
+</div>`).join('');
+}
+
+function createPointOffer() {
+  return OFFERS.map((offer) => `<div class="event__offer-selector">
+                      <input class="event__offer-checkbox  visually-hidden" id="event-offer-${offer.toLowerCase()}-1" type="checkbox" name="event-offer-${offer.toLowerCase()}" checked>
+                      <label class="event__offer-label" for="event-offer-${offer.toLowerCase()}-1">
+                        <span class="event__offer-title">Add ${offer.toLowerCase()}</span>
+                        &plus;&euro;&nbsp;
+                        <span class="event__offer-price">${getRandomValue()}</span>
+                      </label>
+                    </div>`).join('');
+}
+
 function createEditPointTemplate({point}) {
   return `<li class="trip-events__item">
             <form class="event event--edit" action="#" method="post">
@@ -16,11 +34,7 @@ function createEditPointTemplate({point}) {
                   <div class="event__type-list">
                     <fieldset class="event__type-group">
                       <legend class="visually-hidden">Event type</legend>
-
-                      ${POINT_TYPE.map((type) => `<div class="event__type-item">
-                        <input id="event-type-${type.toLowerCase()}-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="${type.toLowerCase()}">
-                        <label class="event__type-label  event__type-label--${type.toLowerCase()}" for="event-type-${type.toLowerCase()}-1">${type}</label>
-                      </div>`).join('')}
+                      ${createPointType()}
                     </fieldset>
                   </div>
                 </div>
@@ -64,14 +78,7 @@ function createEditPointTemplate({point}) {
                   <h3 class="event__section-title  event__section-title--offers">Offers</h3>
 
                   <div class="event__available-offers">
-                    ${OFFERS.map((offer) => `<div class="event__offer-selector">
-                      <input class="event__offer-checkbox  visually-hidden" id="event-offer-${offer.toLowerCase()}-1" type="checkbox" name="event-offer-${offer.toLowerCase()}" checked>
-                      <label class="event__offer-label" for="event-offer-${offer.toLowerCase()}-1">
-                        <span class="event__offer-title">Add ${offer.toLowerCase()}</span>
-                        &plus;&euro;&nbsp;
-                        <span class="event__offer-price">${getRandomValue()}</span>
-                      </label>
-                    </div>`).join('')}
+                    ${createPointOffer()}
                   </div>
                 </section>
 
