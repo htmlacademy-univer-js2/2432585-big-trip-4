@@ -22,5 +22,5 @@ export default class FilterPointsView extends AbstractView {
   #filterTypeChangeHandler = (evt) => {
     evt.preventDefault();
     this.#handleFilterTypeChange(evt.target.value);
-  }
+  };
 }

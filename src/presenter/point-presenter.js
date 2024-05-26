@@ -5,6 +5,7 @@ import EditPointView from '../view/editing-form-view';
 
 import { Mode } from '../const';
 import { UserAction, UpdateType } from '../const';
+import { isDatesEqual, isPriceEqual } from '../utils/points';
 
 export default class PointPresenter {
   #pointListContainer = null;
@@ -139,7 +140,7 @@ export default class PointPresenter {
       UserAction.DELETE_POINT,
       UpdateType.MINOR,
       point
-    )
+    );
   };
 
   #pointFavoriteHandler = () => {

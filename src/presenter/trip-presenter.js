@@ -26,7 +26,7 @@ export default class TripPresenter {
   //#tripPoint = [];
   #currentSortType = SortType.DAY;
   #filterType = FilterType.EVERYTHING;
- // #sourcedTripPoints = [];
+  //#sourcedTripPoints = [];
 
   #pointPresenters = new Map();
   #newPointPresenter = null;
@@ -56,7 +56,8 @@ export default class TripPresenter {
 
     switch(this.#currentSortType){
       case SortType.TIME:
-         filteredPoints.sort(sortPointsByTime);
+        filteredPoints.sort(sortPointsByTime);
+        break;
       case SortType.PRICE:
         filteredPoints.sort(sortPointsByPrice);
     }
@@ -79,7 +80,7 @@ export default class TripPresenter {
   #renderNoPoints = () => {
     this.#noPointsComponent = new EventListEmptyView({
       filterType: this.#filterType,
-    })
+    });
     render(this.#noPointsComponent, this.#listComponent.element, RenderPosition.AFTERBEGIN);
   };
 
@@ -101,7 +102,7 @@ export default class TripPresenter {
   }
 
   #renderPoints = (points) => {
-    points.forEach((point) => {this.#renderPoint(point)});
+    points.forEach((point) => {this.#renderPoint(point);});
   };
 
   #renderPointContainer = () => {

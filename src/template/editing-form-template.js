@@ -1,7 +1,7 @@
 import { POINT_TYPE, OFFERS } from '../const';
 import { formatFullDate } from '../utils/day';
 import { getRandomValue } from '../utils/common';
-import he from 'he';
+//import he from 'he';
 
 function createPointType() {
   return POINT_TYPE.map((type) => `<div class="event__type-item">
