@@ -45,12 +45,19 @@ function createResetButtonTemplate({ type, isDisabled, isDeleting }) {
     ${isDisabled ? 'disabled' : ''}>${label}</button>`;
 }
 
+function createRollupButton(isDisabled) {
+  return `
+    <button class="event__rollup-btn" type="button" ${isDisabled ? 'disabled' : ''}>
+      <span class="visually-hidden">Open event</span>
+    </button>`;
+}
+
 function createControlsButtonsTemplate({ type, isSaving, isDeleting, isDisabled }) {
   return `${createResetButtonTemplate(type)}
-         ${type === EditingType.UPDATE ? createRollupBtn() : ''}
+         ${type === EditingType.UPDATE ? createRollupButton() : ''}
         ${createSaveButtonTemplate({ isSaving, isDisabled })}
         ${createResetButtonTemplate({ type, isDeleting, isDisabled })}
-        ${type === EditingType.UPDATE ? createRollupBtn(isDisabled) : ''}`;
+        ${type === EditingType.UPDATE ? createRollupButton(isDisabled) : ''}`;
 }
 
 function createEditPointTemplate({state, pointDestinations, /* pointOffers */}) {
