@@ -78,6 +78,11 @@ const UserAction = {
   DELETE_POINT: 'DELETE_POINT',
 };
 
+const EditingType = {
+  UPDATE: 'UPDATE',
+  NEW: 'NEW'
+};
+
 const UpdateType = {
   PATCH: 'PATCH',
   MINOR: 'MINOR',
@@ -88,6 +93,16 @@ const UpdateType = {
 const Method = {
   GET: 'GET',
   PUT: 'PUT',
+  POST: 'POST',
+  DELETE: 'DELETE',
+};
+
+const ButtonLabels = {
+  CANCEL: 'Cancel',
+  DELETE_DEFAULT: 'Delete',
+  DELETE_IN_PROGRESS: 'Deleting...',
+  SAVE_DEFAULT: 'Save',
+  SAVE_IN_PROGRESS: 'Saving...'
 };
 
 export {POINT_EMPTY,
@@ -99,5 +114,7 @@ export {POINT_EMPTY,
   Mode,
   SortType,
   UserAction,
+  EditingType,
   UpdateType,
-  Method};
+  Method,
+  ButtonLabels};
