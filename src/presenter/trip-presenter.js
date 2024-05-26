@@ -11,7 +11,7 @@ import NewPointPresenter from './new-point-presenter.js';
 import { sortPointsByTime, sortPointsByPrice } from '../utils/points.js';
 import { filter } from '../utils/filter.js';
 import { SortType, UserAction, UpdateType, FilterType } from '../const.js';
-import EditPointView from '../view/editing-form-view.js';
+//import EditPointView from '../view/editing-form-view.js';
 
 export default class TripPresenter {
   #listComponent = new ListView();

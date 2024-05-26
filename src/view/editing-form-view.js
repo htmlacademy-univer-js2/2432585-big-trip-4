@@ -204,6 +204,7 @@ export default class EditPointView extends AbstractStatefulView {
     isSaving: false,
     isDeleting: false,
   });
+  
   static parseStateToPoint = (state) => {
     const point = {...state,
       dateFrom: dayjs(state.dateFrom).format(),

@@ -53,11 +53,11 @@ function createControlsButtonsTemplate({ type, isSaving, isDeleting, isDisabled 
         ${type === EditingType.UPDATE ? createRollupBtn(isDisabled) : ''}`;
 }
 
-function createEditPointTemplate({state, pointDestinations, pointOffers}) {
+function createEditPointTemplate({state, pointDestinations, /* pointOffers */}) {
   const { point, isDisabled, isSaving, isDeleting } = state;
-  const { id, price, dateFrom, dateTo, offers, type } = point;
+  const { id, price, /* dateFrom, dateTo, offers, */ type } = point;
   const currentDestination = pointDestinations.find((destination) => destination.id === point.destination);
-  const currentOffers = pointOffers.find((offer) => offer.type === type);
+  //const currentOffers = pointOffers.find((offer) => offer.type === type);
   const destinationName = (currentDestination) ? currentDestination.name : '';
 
   return `<li class="trip-events__item">
