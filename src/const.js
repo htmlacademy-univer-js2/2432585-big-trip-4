@@ -1,6 +1,3 @@
-const DESTINATION_COUNT = 7;
-const POINTS_COUNT = 9;
-const OFFERS_COUNT = 5;
 const DEFAULT_TYPE = 'taxi';
 
 //пустая точка
@@ -85,6 +82,12 @@ const UpdateType = {
   PATCH: 'PATCH',
   MINOR: 'MINOR',
   MAJOR: 'MAJOR',
+  INIT: 'INIT',
+};
+
+const Method = {
+  GET: 'GET',
+  PUT: 'PUT',
 };
 
 export {POINT_EMPTY,
@@ -92,11 +95,9 @@ export {POINT_EMPTY,
   DESTINATION,
   DESCRIPTION,
   OFFERS,
-  DESTINATION_COUNT,
-  OFFERS_COUNT,
-  POINTS_COUNT,
   FilterType,
   Mode,
   SortType,
   UserAction,
-  UpdateType};
+  UpdateType,
+  Method};
