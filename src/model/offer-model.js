@@ -1,12 +1,21 @@
-import { getRandomOffer } from '../mock/offer';
-import { OFFERS_COUNT, OFFERS } from '../const';
-import { getRandomValue } from '../utils/common';
+import Observable from '../framework/observable';
 
-export default class OffersModel {
-  #allOffers = OFFERS.map((type) => ({
-    type,
-    offers: Array.from({ length: getRandomValue(0, OFFERS_COUNT) }, () => getRandomOffer())
-  }));
+export default class OffersModel extends Observable{
+  #allOffers = [];
+  #offersApiService = null;
+
+  constructor({offersApiService}) {
+    super();
+    this.#offersApiService = offersApiService;
+  }
+
+  async init(){
+    try {
+      this.#allOffers = await this.#offersApiService.offers;
+    } catch (err) {
+      this.#allOffers = [];
+    }
+  };
 
   get allOffers() {
     return this.#allOffers;

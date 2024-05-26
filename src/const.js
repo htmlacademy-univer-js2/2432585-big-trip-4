@@ -85,6 +85,12 @@ const UpdateType = {
   PATCH: 'PATCH',
   MINOR: 'MINOR',
   MAJOR: 'MAJOR',
+  INIT: 'INIT',
+};
+
+const Method = {
+  GET: 'GET',
+  PUT: 'PUT',
 };
 
 export {POINT_EMPTY,
@@ -99,4 +105,5 @@ export {POINT_EMPTY,
   Mode,
   SortType,
   UserAction,
-  UpdateType};
+  UpdateType,
+  Method};

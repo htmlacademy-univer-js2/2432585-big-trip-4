@@ -1,8 +1,22 @@
-import { getRandomDestination } from '../mock/destination';
 import { DESTINATION_COUNT } from '../const';
+import Observable from '../framework/observable';
 
-export default class DestinationModel {
-  #destination = Array.from({length: DESTINATION_COUNT}, () => getRandomDestination());
+export default class DestinationModel extends Observable{
+  #destination = [];
+  #destinationsApiService = null;
+
+  constructor({destinationsApiService}) {
+    super();
+    this.#destinationsApiService = destinationsApiService;
+  }
+
+  async init(){
+    try {
+      this.#destination = await this.#destinationsApiService.destinations;
+    } catch (err) {
+      this.#destination = [];
+    }
+  };
 
   get destinations() {
     return this.#destination;

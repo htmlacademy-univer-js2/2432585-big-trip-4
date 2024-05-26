@@ -11,32 +11,30 @@ import DestinationModel from './model/destination-model.js';
 import OffersModel from './model/offer-model.js';
 import FilterModel from './model/filter-model.js';
 
+import PointsApiService from './api-service/points-api-service.js';
+import DestinationsApiService from './api-service/destinations-api-server.js';
+import OffersApiService from './api-service/offers-api-server.js';
 //import { generateFilters } from './mock/filter.js';
 
-/* const filters = [
-  {
-    type: 'everything',
-    name: 'EVERYTHING',
-    count: 0,
-  }
-] */
+const AUTHORIZATION = 'Basic mofy87osm1d';
+const END_POINT = 'https://21.objects.htmlacademy.pro/big-trip';
 
 //const filterHeaderElement = document.querySelector('.trip-controls');
 //const siteFilterElement = filterHeaderElement.querySelector('.trip-controls__filters');
 const siteMainElement = document.querySelector('.page-main');
 const tripInfoElement = document.querySelector('.trip-main');
 
-const pointsModel = new PointsModel();
-const destinationModel = new DestinationModel();
-const offersModel = new OffersModel();
+const pointsModel = new PointsModel(new PointsApiService(END_POINT, AUTHORIZATION));
+const destinationModel = new DestinationModel(new PointsApiService(END_POINT, AUTHORIZATION));
+const offersModel = new OffersModel(new PointsApiService(END_POINT, AUTHORIZATION));
 const filterModel = new FilterModel();
 
 const tripPresenter = new TripPresenter({
   listContainer: siteMainElement,
   pointsModel,
+  filterModel,
   destinationsModel: destinationModel,
   offersModel,
-  filterModel,
   onNewPointDestroy: handleNewPointFormClose
 });
 
@@ -61,7 +59,14 @@ function handleNewPointButtonClick() {
 }
 
 render(new TripInfoView(), tripInfoElement, RenderPosition.AFTERBEGIN);
-render(newPointButtonComponent, tripInfoElement);
 
 filterPresenter.init();
 tripPresenter.init();
+offersModel.init().finally(() => {
+  destinationModel.init().finally(() => {
+    pointsModel.init().finally(() => {
+      render(newPointButtonComponent, tripInfoElement);
+  });
+  });
+});
+
