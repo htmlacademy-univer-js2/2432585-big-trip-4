@@ -1,4 +1,3 @@
-import { DESTINATION_COUNT } from '../const';
 import Observable from '../framework/observable';
 
 export default class DestinationModel extends Observable{
@@ -16,7 +15,7 @@ export default class DestinationModel extends Observable{
     } catch (err) {
       this.#destination = [];
     }
-  };
+  }
 
   get destinations() {
     return this.#destination;

@@ -6,7 +6,7 @@ import LoadingView from '../view/loading-view.js';
 import { remove, render, RenderPosition } from '../framework/render.js';
 
 import PointPresenter from './point-presenter.js';
-import NewPointPresenter from './new-point-presenter.js';
+//import NewPointPresenter from './new-point-presenter.js';
 
 import { sortPointsByTime, sortPointsByPrice } from '../utils/points.js';
 import { filter } from '../utils/filter.js';
@@ -140,20 +140,10 @@ export default class TripPresenter {
     this.#renderPoints(this.points);
   };
 
-  /* #clearPointsList() {
-    this.#pointPresenters.forEach((presenter) => presenter.destroy());
-    this.#pointPresenters.clear();
-  } */
-
   #handleModeChange = () => {
     this.#newPointPresenter.destroy();
     this.#pointPresenters.forEach((presenter) => presenter.resetView());
   };
-
-  /* #handlePointChange = (updatePoint) => {
-    //this.#tripPoint = updateItem(this.#tripPoint, updatePoint);
-    this.#pointPresenters.get(updatePoint.id).init(updatePoint);
-  }; */
 
   #handleViewAction = (actionType, updateType, update) => {
     switch(actionType) {
@@ -206,21 +196,6 @@ export default class TripPresenter {
         break;
     }
   };
-
-  /* #sortPoints(sortType) {
-    switch(sortType) {
-      case SortType.TIME:
-        this.#tripPoint.sort(sortPointsByTime);
-        break;
-      case SortType.PRICE:
-        this.#tripPoint.sort(sortPointsByPrice);
-        break;
-      default:
-        this.#tripPoint = [...this.#sourcedTripPoints];
-    }
-
-    this.#currentSortType = sortType;
-  } */
 
   #handleSortTypeChange = (sortType) => {
     if (this.#currentSortType === sortType) {

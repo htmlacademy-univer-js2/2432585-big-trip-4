@@ -1,4 +1,3 @@
-//import FilterPointsView from './view/filter-points-view.js';
 import TripInfoView from './view/trip-info-view.js';
 import TripPresenter from './presenter/trip-presenter.js';
 import FilterPresenter from './presenter/filter-presenter.js';
@@ -12,9 +11,6 @@ import OffersModel from './model/offer-model.js';
 import FilterModel from './model/filter-model.js';
 
 import PointsApiService from './api-service/points-api-service.js';
-import DestinationsApiService from './api-service/destinations-api-server.js';
-import OffersApiService from './api-service/offers-api-server.js';
-//import { generateFilters } from './mock/filter.js';
 
 const AUTHORIZATION = 'Basic mofy87osm1d';
 const END_POINT = 'https://21.objects.htmlacademy.pro/big-trip';
@@ -38,7 +34,6 @@ const tripPresenter = new TripPresenter({
   onNewPointDestroy: handleNewPointFormClose
 });
 
-//const filters = generateFilters(pointsModel.points);
 const filterPresenter = new FilterPresenter({
   filterContainer: siteMainElement,
   filterModel,
@@ -66,7 +61,7 @@ offersModel.init().finally(() => {
   destinationModel.init().finally(() => {
     pointsModel.init().finally(() => {
       render(newPointButtonComponent, tripInfoElement);
-  });
+    });
   });
 });
 

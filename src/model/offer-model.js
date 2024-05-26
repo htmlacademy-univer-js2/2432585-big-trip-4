@@ -15,7 +15,7 @@ export default class OffersModel extends Observable{
     } catch (err) {
       this.#allOffers = [];
     }
-  };
+  }
 
   get allOffers() {
     return this.#allOffers;

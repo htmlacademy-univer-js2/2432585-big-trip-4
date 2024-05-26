@@ -1,6 +1,3 @@
-const DESTINATION_COUNT = 7;
-const POINTS_COUNT = 9;
-const OFFERS_COUNT = 5;
 const DEFAULT_TYPE = 'taxi';
 
 //пустая точка
@@ -98,9 +95,6 @@ export {POINT_EMPTY,
   DESTINATION,
   DESCRIPTION,
   OFFERS,
-  DESTINATION_COUNT,
-  OFFERS_COUNT,
-  POINTS_COUNT,
   FilterType,
   Mode,
   SortType,

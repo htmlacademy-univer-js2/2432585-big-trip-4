@@ -43,7 +43,7 @@ export default class PointsModel extends Observable {
       this._notify(updateType, updatedPoint);
     } catch(err) {
       throw new Error('Can\'t update point');
-    };
+    }
   }
 
   addPoint = (updateType, update) => {
@@ -74,7 +74,7 @@ export default class PointsModel extends Observable {
     const adaptedPoint = {
       ...point,
       basePrice: point['base_price'],
-      dateFrom: point['date_from']!== null ? new Date(point['date_from']) : point['date_from'],
+      dateFrom: point['date_from'] !== null ? new Date(point['date_from']) : point['date_from'],
       dateTo: point['date_to'] !== null ? new Date(point['date_to']) : point['date_to'],
       isFavorite: point['is_favorite'],
     };
@@ -85,5 +85,5 @@ export default class PointsModel extends Observable {
     delete adaptedPoint['is_favorite'];
 
     return adaptedPoint;
-  }
+  };
 }
