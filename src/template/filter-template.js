@@ -1,5 +1,5 @@
 function createFilterItems(filters, currentFilterType) {
-  return filters.map((type) => `<div class="trip-filters__filter">
+  return filters.filters.map((type) => `<div class="trip-filters__filter">
         <input id="filter-${type}" class="trip-filters__filter-input  visually-hidden" type="radio"
           name="trip-filter" value="${type}" ${type === currentFilterType ? 'checked' : ''}>
         <label class="trip-filters__filter-label" for="filter-${type}">${filters.name}</label>

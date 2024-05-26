@@ -57,12 +57,12 @@ const OFFERS = [
   'Travel by train',
 ];
 
-const FilterType = [{
+const FilterType = {
   EVERYTHING: 'everything',
   FUTURE: 'future',
   PRESENT: 'present',
   PAST: 'past'
-}];
+};
 
 const Mode = {
   DEFAULT: 'DEFAULT',

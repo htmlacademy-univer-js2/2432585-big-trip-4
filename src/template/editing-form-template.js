@@ -1,6 +1,7 @@
 import { POINT_TYPE, OFFERS } from '../const';
 import { formatFullDate } from '../utils/day';
 import { getRandomValue } from '../utils/common';
+import he from 'he';
 
 function createPointType() {
   return POINT_TYPE.map((type) => `<div class="event__type-item">
@@ -21,6 +22,7 @@ function createPointOffer() {
 }
 
 function createEditPointTemplate({point}) {
+
   return `<li class="trip-events__item">
             <form class="event event--edit" action="#" method="post">
               <header class="event__header">
@@ -64,7 +66,8 @@ function createEditPointTemplate({point}) {
                     <span class="visually-hidden">Price</span>
                     &euro;
                   </label>
-                  <input class="event__input  event__input--price" id="event-price-1" type="text" name="event-price" value="160">
+                  <input class="event__input  event__input--price" id="event-price-1" type="text" name="event-price"
+                  value="${point.basePrice}">
                 </div>
 
                 <button class="event__save-btn  btn  btn--blue" type="submit">Save</button>
