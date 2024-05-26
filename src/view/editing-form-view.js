@@ -2,6 +2,8 @@ import AbstractStatefulView from '../framework/view/abstract-stateful-view.js';
 import { createEditPointTemplate } from '../template/editing-form-template.js';
 import { POINT_EMPTY } from '../const.js';
 
+import dayjs from 'dayjs';
+
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
@@ -29,7 +31,7 @@ export default class EditPointView extends AbstractStatefulView {
 
   get template() {
     return createEditPointTemplate({
-      point: this._state,
+      state: this._state,
       pointDestinations: this.#pointDestinations,
       pointOffers: this.#pointOffers
     });
@@ -196,6 +198,23 @@ export default class EditPointView extends AbstractStatefulView {
     );
   };
 
-  static parsePointToState = (point) => ({point});
-  static parseStateToPoint = (state) => ({...state});
+  static parsePointToState = (point) => ({
+    ...point,
+    isDisabled: false,
+    isSaving: false,
+    isDeleting: false,
+  });
+  static parseStateToPoint = (state) => {
+    const point = {...state,
+      dateFrom: dayjs(state.dateFrom).format(),
+      dateTo: dayjs(state.dateTo).format(),
+      basePrice: Number(state.basePrice)
+    };
+
+    delete point.isDisabled;
+    delete point.isSaving;
+    delete point.isDeleting;
+
+    return point;
+  };
 }

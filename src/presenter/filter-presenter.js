@@ -10,6 +10,8 @@ export default class FilterPresenter {
 
   #filterComponent = null;
 
+  #currentFilter = null;
+
   constructor({filterContainer, filterModel, pointsModel}) {
     this.#filterContainer = filterContainer;
     this.#filterModel = filterModel;
@@ -26,12 +28,13 @@ export default class FilterPresenter {
   }
 
   init() {
+    this.#currentFilter = this.#filterModel.filter;
     const filters = this.filters;
     const prevFilterComponent = this.#filterComponent;
 
     this.#filterComponent = new FilterPointsView({
       filters,
-      currentFilterType: this.#filterModel.filter,
+      currentFilterType: this.#currentFilter,
       onFilterTypeChange: this.#handleFilterTypeChange
     });
 
