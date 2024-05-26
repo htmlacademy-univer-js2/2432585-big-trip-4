@@ -5,7 +5,7 @@ import SortPointsView from '../view/sort-points-view.js';
 import { remove, render, RenderPosition } from '../framework/render.js';
 
 import PointPresenter from './point-presenter.js';
-import NewPointPresenter from './new-point-presenter.js';
+//import NewPointPresenter from './new-point-presenter.js';
 
 import { sortPointsByTime, sortPointsByPrice } from '../utils/points.js';
 import { filter } from '../utils/filter.js';
