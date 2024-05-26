@@ -57,12 +57,12 @@ const OFFERS = [
   'Travel by train',
 ];
 
-const FilterType = [{
+const FilterType = {
   EVERYTHING: 'everything',
   FUTURE: 'future',
   PRESENT: 'present',
   PAST: 'past'
-}];
+};
 
 const Mode = {
   DEFAULT: 'DEFAULT',
@@ -75,6 +75,18 @@ const SortType = [{
   PRICE: 'price'
 }];
 
+const UserAction = {
+  UPDATE_POINT: 'UPDATE_POINT',
+  ADD_POINT: 'ADD_POINT',
+  DELETE_POINT: 'DELETE_POINT',
+};
+
+const UpdateType = {
+  PATCH: 'PATCH',
+  MINOR: 'MINOR',
+  MAJOR: 'MAJOR',
+};
+
 export {POINT_EMPTY,
   POINT_TYPE,
   DESTINATION,
@@ -85,4 +97,6 @@ export {POINT_EMPTY,
   POINTS_COUNT,
   FilterType,
   Mode,
-  SortType};
+  SortType,
+  UserAction,
+  UpdateType};
