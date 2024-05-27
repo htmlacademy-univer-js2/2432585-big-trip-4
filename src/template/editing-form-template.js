@@ -1,6 +1,6 @@
 import { POINT_TYPE, /* OFFERS, */ ButtonLabels, EditingType } from '../const';
 import { formatFullDate } from '../utils/day';
-import { getRandomValue } from '../utils/common';
+//import { getRandomValue } from '../utils/common';
 import he from 'he';
 
 function createPointType(pointId, currentType, isDisabled) {
@@ -80,11 +80,11 @@ function createControlsButtonsTemplate({ type, isSaving, isDeleting, isDisabled 
         ${type === EditingType.UPDATE ? createRollupButton(isDisabled) : ''}`;
 }
 
-function createEditPointTemplate({state, pointDestinations, pointOffers}) {
+function createEditPointTemplate({state, pointDestinations, /* pointOffers */}) {
   const { point, isDisabled, isSaving, isDeleting } = state;
   const { id, price, dateFrom, dateTo, offers, type } = point;
   const currentDestination = pointDestinations.find((destination) => destination.id === point.destinations);
-  const currentOffers = pointOffers.find((offer) => offer.type === type);
+  //const currentOffers = pointOffers.find((offer) => offer.type === type);
   const destinationName = (currentDestination) ? currentDestination.name : '';
 
   return (`
@@ -110,7 +110,7 @@ function createEditPointTemplate({state, pointDestinations, pointOffers}) {
           </label>
           <input class="event__input  event__input--destination" id="event-destination-${id}" type="text" name="event-destination" value="${he.encode(destinationName)}" list="destination-list-${id}" ${isDisabled ? 'disabled' : ''}>
           <datalist id="destination-list-${id}"/>
-            ${createPointDestinations(destinations)}
+            ${createPointDestinations(pointDestinations)}
           </datalist>
         </div>
         <div class="event__field-group  event__field-group--time">
