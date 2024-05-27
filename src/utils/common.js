@@ -16,7 +16,7 @@ const getStartPoint = (points) => {
       if(dayjs(currentPointDate).diff(dayjs(endPointDate), 'M') < 0
         || dayjs(currentPointDate).diff(dayjs(endPointDate), 'M') === 0
         && dayjs(currentPointDate).diff(dayjs(endPointDate), 'D') < 0) {
-          startPoint = points[i];
+        startPoint = points[i];
       }
     }
     return startPoint;
@@ -24,9 +24,9 @@ const getStartPoint = (points) => {
 };
 
 const getEndPoint = (points) => {
-  let endPoint = points[0];
+  const endPoint = points[0];
   for(let i = 1; i < points.length; i++) {
-    const currentPointDate = points[i].endDate;
+    //const currentPointDate = points[i].endDate;
     /* if(dayjs(currentPointDate).diff(dayjs(endPointDate), 'M') > 0
       || dayjs(currentPointDate).diff(dayjs(endPointDate), 'M') === 0
       && dayjs(currentPointDate).diff(dayjs(endPointDate), 'D') > 0) {
