@@ -3,6 +3,7 @@ import EventListEmptyView from '../view/event-list-empty-view.js';
 import SortPointsView from '../view/sort-points-view.js';
 import LoadingView from '../view/loading-view.js';
 
+import UiBlocker from '../framework/ui-blocker/ui-blocker.js';
 import { remove, render, RenderPosition } from '../framework/render.js';
 
 import PointPresenter from './point-presenter.js';
@@ -10,7 +11,7 @@ import NewPointPresenter from './new-point-presenter.js';
 
 import { sortPointsByTime, sortPointsByPrice } from '../utils/points.js';
 import { filter } from '../utils/filter.js';
-import { SortType, UserAction, UpdateType, FilterType } from '../const.js';
+import { SortType, UserAction, UpdateType, FilterType, TimeLimit } from '../const.js';
 //import EditPointView from '../view/editing-form-view.js';
 
 export default class TripPresenter {
@@ -28,6 +29,11 @@ export default class TripPresenter {
   #currentSortType = SortType.DAY;
   #filterType = FilterType.EVERYTHING;
   #isLoading = true;
+
+  #uiBlocker = new UiBlocker({
+    lowerLimit: TimeLimit.LOWER_LIMIT,
+    upperLimit: TimeLimit.UPPER_LIMIT
+  });
 
   #pointPresenters = new Map();
   #newPointPresenter = null;
@@ -146,6 +152,8 @@ export default class TripPresenter {
   };
 
   #handleViewAction = async (actionType, updateType, update) => {
+    this.#uiBlocker.block();
+
     switch(actionType) {
       case UserAction.UPDATE_POINT:
         this.#pointPresenters.get(update.id).setSaving();
@@ -172,6 +180,8 @@ export default class TripPresenter {
         }
         break;
     }
+
+    this.#uiBlocker.unblock();
   };
 
   #clearBoard = ({resetSortType = false} = {}) => {
