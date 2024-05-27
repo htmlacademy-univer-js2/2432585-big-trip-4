@@ -11,15 +11,17 @@ function createPointType(pointId, currentType, isDisabled) {
     </div>`).join('');
 }
 
-function createPointOffer() {
-  return OFFERS.map((offer) => `<div class="event__offer-selector">
-                      <input class="event__offer-checkbox  visually-hidden" id="event-offer-${offer.toLowerCase()}-${offer.id}" type="checkbox" name="event-offer-${offer.toLowerCase()}" ${offer?.includes(offer.id) ? 'checked' : ''}>
-                      <label class="event__offer-label" for="event-offer-${offer.toLowerCase()}-1">
-                        <span class="event__offer-title">Add ${offer.toLowerCase()}</span>
-                        &plus;&euro;&nbsp;
-                        <span class="event__offer-price">${getRandomValue()}</span>
-                      </label>
-                    </div>`).join('');
+function createPointOffer(offers, point, isDisabled) {
+  return offers.map((offer) => `
+    <div class="event__offer-selector">
+      <input class="event__offer-checkbox  visually-hidden" data-offer-id="${offer.id}"
+        id="event-offer-${offer.id}-1" type="checkbox" name="event-offer-${offer.id}" ${point.offers.includes(offer.id) ? 'checked' : ''} ${isDisabled ? 'disabled' : ''}>
+        <label class="event__offer-label" for="event-offer-${offer.id}">
+        <span class="event__offer-title">${offer.title}</span>
+          &plus;&euro;&nbsp;
+        <span class="event__offer-price">${offer.price}</span>
+       </label>
+    </div>`).join('');
 }
 
 function createPointPictures(destination) {
@@ -113,10 +115,10 @@ function createEditPointTemplate({state, pointDestinations, pointOffers}) {
         </div>
         <div class="event__field-group  event__field-group--time">
           <label class="visually-hidden" for="event-start-time-${id}">From</label>
-          <input class="event__input  event__input--time" id="event-start-time-${id}" type="text" name="event-start-time" ${point.dateFrom ? formatStringToDateTime(dateFrom) : ''} ${isDisabled ? 'disabled' : ''}>
+          <input class="event__input  event__input--time" id="event-start-time-${id}" type="text" name="event-start-time" ${point.dateFrom ? formatFullDate(dateFrom) : ''} ${isDisabled ? 'disabled' : ''}>
           &mdash;
           <label class="visually-hidden" for="event-end-time-${id}">To</label>
-          <input class="event__input  event__input--time" id="event-end-time-${id}" type="text" name="event-end-time" ${point.dateTo ? formatStringToDateTime(dateTo) : ''} ${isDisabled ? 'disabled' : ''}>
+          <input class="event__input  event__input--time" id="event-end-time-${id}" type="text" name="event-end-time" ${point.dateTo ? formatFullDate(dateTo) : ''} ${isDisabled ? 'disabled' : ''}>
         </div>
         <div class="event__field-group  event__field-group--price">
           <label class="event__label" for="event-price-${id}">
@@ -131,7 +133,7 @@ function createEditPointTemplate({state, pointDestinations, pointOffers}) {
       <section class="event__details">
         <section class="event__section  event__section--offers">
           <h3 class="event__section-title  event__section-title--offers">Offers</h3>
-          ${createPointOffer(currentOffers, offers, isDisabled)}
+          ${createPointOffer(offers, point, isDisabled)}
         </section>
         ${currentDestination ? `<section class="event__section  event__section--destination">
           ${createDestination(currentDestination)}

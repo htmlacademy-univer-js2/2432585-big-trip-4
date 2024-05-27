@@ -1,8 +1,6 @@
 import { humanizePointDate } from '../utils/points';
 import { getStartPoint, getEndPoint } from '../utils/common';
 
-
-
 function getTotalPrice(points, offers) {
   if (points.length === 0) {
     return '';
@@ -33,11 +31,11 @@ function getDates(points) {
   if (points.length === 0) {
     return '';
   }
-  
+
   const startPoint = getStartPoint(points);
   const endPoint = getEndPoint(points);
 
-  return `<p class="trip-info__dates">${humanizePointDate(startPoint.startDate, 'MMM D')}&nbsp;&mdash;&nbsp;${humanizePointDate(endPoint.endDate, 'MMM D')}</p>`
+  return `<p class="trip-info__dates">${humanizePointDate(startPoint.startDate, 'MMM D')}&nbsp;&mdash;&nbsp;${humanizePointDate(endPoint.endDate, 'MMM D')}</p>`;
 }
 
 function getRouteTrip(points, destinations) {
@@ -59,7 +57,7 @@ function getRouteTrip(points, destinations) {
 
   return route.map((destination) => `${destinations.find((item) => item.id === destination).name}`).join(' &mdash; ');
 
-};
+}
 
 function createTripInfoTemplate(points, destinations, offers) {
   return `<section class="trip-main__trip-info  trip-info">

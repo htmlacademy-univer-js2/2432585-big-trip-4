@@ -3,7 +3,7 @@ import EventListEmptyView from '../view/event-list-empty-view.js';
 import SortPointsView from '../view/sort-points-view.js';
 import LoadingView from '../view/loading-view.js';
 
-import UiBlocker from '../framework/ui-blocker/ui-blocker.js'
+import UiBlocker from '../framework/ui-blocker/ui-blocker.js';
 import { remove, render, RenderPosition } from '../framework/render.js';
 
 import PointPresenter from './point-presenter.js';
