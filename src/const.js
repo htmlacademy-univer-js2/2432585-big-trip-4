@@ -105,6 +105,11 @@ const ButtonLabels = {
   SAVE_IN_PROGRESS: 'Saving...'
 };
 
+const TimeLimit = {
+  LOWER_LIMIT: 350,
+  UPPER_LIMIT: 1000,
+}
+
 export {POINT_EMPTY,
   POINT_TYPE,
   DESTINATION,
@@ -117,4 +122,5 @@ export {POINT_EMPTY,
   EditingType,
   UpdateType,
   Method,
-  ButtonLabels};
+  ButtonLabels,
+  TimeLimit};
