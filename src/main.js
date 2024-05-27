@@ -12,11 +12,8 @@ import FilterModel from './model/filter-model.js';
 
 import PointsApiService from './api-service/points-api-service.js';
 
-const AUTHORIZATION = 'Basic mofy87osm1d';
-const END_POINT = 'https://21.objects.htmlacademy.pro/big-trip';
+import { AUTHORIZATION, END_POINT } from './const.js';
 
-//const filterHeaderElement = document.querySelector('.trip-controls');
-//const siteFilterElement = filterHeaderElement.querySelector('.trip-controls__filters');
 const siteMainElement = document.querySelector('.page-main');
 const tripInfoElement = document.querySelector('.trip-main');
 

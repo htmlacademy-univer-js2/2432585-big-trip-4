@@ -1,8 +1,11 @@
 const DEFAULT_TYPE = 'taxi';
 
+const AUTHORIZATION = 'Basic mofy87osm1d';
+const END_POINT = 'https://21.objects.htmlacademy.pro/big-trip';
+
 //пустая точка
 const POINT_EMPTY = {
-  basePrice: 0,
+  basePrice: 1,
   dateFrom: null,
   dateTo: null,
   destination: null,
@@ -23,37 +26,6 @@ const POINT_TYPE = [
   'Restaurant'
 ];
 
-const DESTINATION = [
-  'Ekaterinburg',
-  'Moscow',
-  'Tokyo',
-  'Kawaguchiko',
-  'Shibuya',
-  'Harayuki',
-  'Roppongi',
-  'Kyoto',
-  'Gose Palace',
-  'Kinkaku-ji',
-  'Hiroshima',
-  'Miyajima Island',
-  'Nikko Park'
-];
-
-const DESCRIPTION = [
-  'Nullam nunc ex, convallis sed finibus eget, sollicitudin eget ante.',
-  'Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum.',
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-  'Aliquam erat volutpat.'
-];
-
-const OFFERS = [
-  'Add luggage',
-  'Switch to comfort class',
-  'Add meal',
-  'Choose seats',
-  'Travel by train',
-];
-
 const FilterType = {
   EVERYTHING: 'everything',
   FUTURE: 'future',
@@ -66,11 +38,11 @@ const Mode = {
   EDITING: 'EDITING',
 };
 
-const SortType = [{
+const SortType = {
   DAY: 'day',
   TIME: 'time',
   PRICE: 'price'
-}];
+};
 
 const UserAction = {
   UPDATE_POINT: 'UPDATE_POINT',
@@ -111,10 +83,9 @@ const TimeLimit = {
 }
 
 export {POINT_EMPTY,
+  AUTHORIZATION,
+  END_POINT,
   POINT_TYPE,
-  DESTINATION,
-  DESCRIPTION,
-  OFFERS,
   FilterType,
   Mode,
   SortType,

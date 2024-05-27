@@ -23,6 +23,8 @@ function sortPointsByPrice(pointA, pointB){
   }
 }
 
+const humanizePointDate = (date, form) => dayjs(date).format(form);
+
 function isDatesEqual(dateA, dateB) {
   return (dateA === null && dateB === null) || dayjs(dateA).isSame(dateB, 'D');
 }
@@ -31,4 +33,4 @@ function isPriceEqual(priceA, priceB) {
   return priceA === priceB;
 }
 
-export {sortPointsByPrice, sortPointsByTime, sortPointsByDay, isDatesEqual, isPriceEqual};
+export {sortPointsByPrice, sortPointsByTime, sortPointsByDay, isDatesEqual, isPriceEqual, humanizePointDate};
