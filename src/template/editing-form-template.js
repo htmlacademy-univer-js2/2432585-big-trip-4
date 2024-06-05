@@ -31,7 +31,7 @@ function createPointPictures(destination) {
     `<img class="event__photo" src="${picture.src}" alt="${picture.description}">`).join('')}
     </div>
     </div>`
-  : '';
+    : '';
 }
 
 function createDestination(destination) {

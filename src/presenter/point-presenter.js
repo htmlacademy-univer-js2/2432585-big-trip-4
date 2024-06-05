@@ -8,9 +8,9 @@ import { UserAction, UpdateType } from '../const';
 import { isDatesEqual, isPriceEqual } from '../utils/points';
 
 const Mode = {
-      DEFAULT: 'DEFAULT',
-      EDITING: 'EDITING',
-    };
+  DEFAULT: 'DEFAULT',
+  EDITING: 'EDITING',
+};
 
 export default class PointPresenter {
   #pointListContainer = null;
@@ -28,9 +28,9 @@ export default class PointPresenter {
   #mode = Mode.DEFAULT;
 
   constructor({ pointListContainer, destinationsModel, offersModel, onDataChange, onModeChange }) {
-    if (!pointListContainer || !pointListContainer instanceof Element) {
+    /* if (!pointListContainer || !pointListContainer instanceof Element) {
       throw new Error('Invalid pointListContainer or its element');
-    }
+    } */
 
     this.#pointListContainer = pointListContainer;
     this.#destinationsModel = destinationsModel;
@@ -53,7 +53,7 @@ export default class PointPresenter {
       onFavoriteClick: this.#pointFavoriteHandler
     });
 
-     this.#pointEditComponent = new EditPointView({
+    this.#pointEditComponent = new EditPointView({
       point: this.#point,
       pointDestinations: this.#destinationsModel.destinations,
       pointOffers: this.#offersModel.allOffers,
