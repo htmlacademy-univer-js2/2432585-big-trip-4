@@ -1,4 +1,6 @@
 import dayjs from 'dayjs';
+import { PeriodsTime } from '../const';
+
 function formatStringToDateTime(date) {
   return dayjs(date).format('YYYY-MM-DDTHH:mm');
 }
@@ -15,20 +17,14 @@ function formatStringToTime(date) {
   return dayjs(date).format('HH:mm');
 }
 
-const periodsTime = {
-  MINS_IN_HOUR: 60,
-  HOURS_IN_DAY : 24,
-  MINS_IN_DAY : 60 * 24,
-  DAY_IN_MONTH : 31
-};
 
 function getDateDiff(dateFrom, dateTo) {
   const diff = dayjs(dateTo).diff(dayjs(dateFrom), 'm');
 
-  if (diff > periodsTime.MINS_IN_HOUR) {
-    return `${Math.ceil(diff / periodsTime.MINS_IN_HOUR)} H`;
-  } else if (diff > periodsTime.HOURS_IN_DAY) {
-    return `${Math.ceil(diff / periodsTime.MINS_IN_DAY)} D`;
+  if (diff > PeriodsTime.MINS_IN_HOUR) {
+    return `${Math.ceil(diff / PeriodsTime.MINS_IN_HOUR)} H`;
+  } else if (diff > PeriodsTime.HOURS_IN_DAY) {
+    return `${Math.ceil(diff / PeriodsTime.MINS_IN_DAY)} D`;
   }
 
   return `${Math.ceil(diff)} M`;

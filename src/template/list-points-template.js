@@ -1,39 +1,42 @@
 import { formatStringToDateTime, formatStringToShortDate, formatStringToTime, getDateDiff } from '../utils/day';
+import he from 'he';
 
-function createOffers(offers) {
-  return offers ? offers.map((offer) =>
-    `<li class="event__offer">
-    <span class="event__offer-title">${offer.title}</span>
-    &plus;&euro;&nbsp;
-    <span class="event__offer-price">${offer.price}</span>
-  </li>`).join('') : '';
+function createOffers({ currentOffers, offers }) {
+  return `<ul class="event__selected-offers">
+    ${currentOffers.offers.filter((offer) => offers.includes(offer.id)).map((offer) => `
+      <li class="event__offer">
+        <span class="event__offer-title">${offer.title}</span>
+        &plus;&euro;&nbsp;
+        <span class="event__offer-price">${offer.price}</span>
+      </li>
+    `).join('')}
+    </ul>`
 }
 
-function createListPointsTemplate({point, destinations, offers}) {
-  const isActiveClassName = point.isFavorite ? 'event__favorite-btn--active' : '';
+function createListPointsTemplate({ point, destinations, currentOffers }) {
+  const { basePrice, dateFrom, dateTo, isFavorite, type, offers } = point;
+  const isFavoriteClassName = isFavorite ? 'event__favorite-btn--active' : '';
 
   return `<div class="event">
-            <time class="event__date" datetime=${formatStringToDateTime(point.dateFrom)}>${formatStringToShortDate(point.dateFrom)}</time>
+            <time class="event__date" datetime=${formatStringToDateTime(dateFrom)}>${formatStringToShortDate(dateFrom)}</time>
             <div class="event__type">
-              <img class="event__type-icon" width="42" height="42" src="img/icons/${point.type.toLowerCase()}.png" alt="Event type icon">
+              <img class="event__type-icon" width="42" height="42" src="img/icons/${type}.png" alt="Event type icon">
             </div>
-            <h3 class="event__title">${point.type} ${destinations}</h3>
+            <h3 class="event__title">${type} ${he.encode(destinations.name)}</h3>
             <div class="event__schedule">
               <p class="event__time">
-                <time class="event__start-time" datetime=${formatStringToDateTime(point.dateFrom)}>${formatStringToTime(point.dateFrom)}</time>
+                <time class="event__start-time" datetime=${formatStringToDateTime(dateFrom)}>${formatStringToTime(dateFrom)}</time>
                 &mdash;
-                <time class="event__end-time" datetime=${formatStringToDateTime(point.dateTo)}>${formatStringToTime(point.dateTo)}</time>
+                <time class="event__end-time" datetime=${formatStringToDateTime(dateTo)}>${formatStringToTime(dateTo)}</time>
               </p>
-              <p class="event__duration">${getDateDiff(point.dateFrom, point.dateTo)}</p>
+              <p class="event__duration">${getDateDiff(dateFrom, dateTo)}</p>
             </div>
             <p class="event__price">
-              &euro;&nbsp;<span class="event__price-value">${point.basePrice}</span>
+              &euro;&nbsp;<span class="event__price-value">${he.encode(basePrice.toString())}</span>
             </p>
             <h4 class="visually-hidden">Offers:</h4>
-            <ul class="event__selected-offers">
-              ${createOffers(offers)}
-            </ul>
-            <button class="event__favorite-btn ${isActiveClassName}" type="button">
+              ${offers.length > 0 ? createOffers({ currentOffers, offers }) : ''}
+            <button class="event__favorite-btn ${isFavoriteClassName}" type="button">
               <span class="visually-hidden">Add to favorite</span>
               <svg class="event__favorite-icon" width="28" height="28" viewBox="0 0 28 28">
                 <path d="M14 21l-8.22899 4.3262 1.57159-9.1631L.685209 9.67376 9.8855 8.33688 14 0l4.1145 8.33688 9.2003 1.33688-6.6574 6.48934 1.5716 9.1631L14 21z"/>

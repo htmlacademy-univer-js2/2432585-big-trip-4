@@ -3,15 +3,20 @@ import { remove, render, replace } from '../framework/render';
 import ListPointsView from '../view/list-points-view';
 import EditPointView from '../view/editing-form-view';
 
-import { Mode } from '../const';
+//import { Mode } from '../const';
 import { UserAction, UpdateType } from '../const';
 import { isDatesEqual, isPriceEqual } from '../utils/points';
+
+const Mode = {
+      DEFAULT: 'DEFAULT',
+      EDITING: 'EDITING',
+    };
 
 export default class PointPresenter {
   #pointListContainer = null;
 
-  #pointComponent;
-  #pointEditComponent;
+  #pointComponent = null;
+  #pointEditComponent = null;
 
   #destinationsModel = null;
   #offersModel = null;
@@ -23,12 +28,10 @@ export default class PointPresenter {
   #mode = Mode.DEFAULT;
 
   constructor({ pointListContainer, destinationsModel, offersModel, onDataChange, onModeChange }) {
-    /* console.log('PointPresenter constructor:', { pointListContainer, destinationsModel, offersModel }); */
-
-    /* if (!pointListContainer || !pointListContainer instanceof Element) {
+    if (!pointListContainer || !pointListContainer instanceof Element) {
       throw new Error('Invalid pointListContainer or its element');
     }
- */
+
     this.#pointListContainer = pointListContainer;
     this.#destinationsModel = destinationsModel;
     this.#offersModel = offersModel;
@@ -42,9 +45,6 @@ export default class PointPresenter {
     const prevPointComponent = this.#pointComponent;
     const prevPointEditComponent = this.#pointEditComponent;
 
-    /* console.log('Init point:', point);
-    console.log('Destinations Model:', this.#destinationsModel); */
-
     this.#pointComponent = new ListPointsView({
       point: this.#point,
       destination: this.#destinationsModel.getDestinationById(point.destination),
@@ -53,14 +53,15 @@ export default class PointPresenter {
       onFavoriteClick: this.#pointFavoriteHandler
     });
 
-    this.#pointEditComponent = new EditPointView({
+     this.#pointEditComponent = new EditPointView({
       point: this.#point,
       pointDestinations: this.#destinationsModel.destinations,
       pointOffers: this.#offersModel.allOffers,
-      onResetClick: this.#resetButtonClickHandler,
+      onResetClick: this.#handleFormReset,
       onSubmitClick: this.#handleFormSubmit,
-      onDeleteClick: this.#pointDeleteClickHandler
+      onDeleteClick: this.#handleFormDelete
     });
+
 
     if (!prevPointComponent || !prevPointEditComponent) {
       render(this.#pointComponent, this.#pointListContainer);
@@ -77,13 +78,12 @@ export default class PointPresenter {
 
     remove(prevPointComponent);
     remove(prevPointEditComponent);
-    /* console.log('Rendering point component to:', this.#pointListContainer); */
   }
 
   setSaving() {
     if (this.#mode === Mode.EDIT) {
       this.#pointEditComponent.updateElement({
-        isDisabled: false,
+        isDisabled: true,
         isSaving: true
       });
     }
@@ -103,6 +103,7 @@ export default class PointPresenter {
       this.#pointComponent.shake();
       return;
     }
+
     const resetFormState = () => {
       this.#pointEditComponent.updateElement({
         isDisabled: false,
@@ -110,6 +111,7 @@ export default class PointPresenter {
         isDeleting: false,
       });
     };
+
     this.#pointEditComponent.shake(resetFormState);
   }
 
@@ -128,6 +130,7 @@ export default class PointPresenter {
   #escKeyDownHandler = (evt) => {
     if (evt.key === 'Escape' || evt.key === 'Esc') {
       evt.preventDefault();
+      this.#pointEditComponent.reset(this.#point);
       this.#replaceEditToPoint();
     }
   };
@@ -157,23 +160,22 @@ export default class PointPresenter {
       isMinorUpdate ? UpdateType.MINOR : UpdateType.PATCH,
       update,
     );
-
-    //this.#replaceEditToPoint();
   };
 
   #pointEditClickHandler = () => {
     this.#replacePointToEdit();
   };
 
-  #resetButtonClickHandler = () => {
+  #handleFormReset = () => {
+    this.#pointEditComponent.reset(this.#point);
     this.#replaceEditToPoint();
   };
 
-  #pointDeleteClickHandler = (point) => {
+  #handleFormDelete = (point) => {
     this.#handleDataChange(
       UserAction.DELETE_POINT,
       UpdateType.MINOR,
-      point
+      point,
     );
   };
 

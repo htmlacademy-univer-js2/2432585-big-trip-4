@@ -11,17 +11,7 @@ function sortPointsByTime(pointA, pointB) {
   return durationA - durationB;
 }
 
-function sortPointsByPrice(pointA, pointB){
-  const diff = pointA.basePrice - pointB.basePrice;
-
-  if (diff > 0) {
-    return -1;
-  } else if (diff < 0) {
-    return 1;
-  } else {
-    return 0;
-  }
-}
+const sortPointsByPrice = (pointA, pointB) => pointA.basePrice - pointB.basePrice;
 
 const humanizePointDate = (date, form) => dayjs(date).format(form);
 

@@ -1,6 +1,6 @@
 const DEFAULT_TYPE = 'taxi';
 
-const AUTHORIZATION = 'Basic mofy87osm1d';
+const AUTHORIZATION = 'Basic moLfy87osjm1dqP';
 const END_POINT = 'https://21.objects.htmlacademy.pro/big-trip';
 
 //пустая точка
@@ -33,10 +33,10 @@ const FilterType = {
   PAST: 'past'
 };
 
-const Mode = {
+/* const Mode = {
   DEFAULT: 'DEFAULT',
   EDITING: 'EDITING',
-};
+}; */
 
 const SortType = {
   DAY: 'day',
@@ -82,16 +82,24 @@ const TimeLimit = {
   UPPER_LIMIT: 1000,
 };
 
+const PeriodsTime = {
+  MINS_IN_HOUR: 60,
+  HOURS_IN_DAY : 24,
+  MINS_IN_DAY : 60 * 24,
+  DAY_IN_MONTH : 31
+};
+
 export {POINT_EMPTY,
   AUTHORIZATION,
   END_POINT,
   POINT_TYPE,
   FilterType,
-  Mode,
+  /* Mode, */
   SortType,
   UserAction,
   EditingType,
   UpdateType,
   Method,
   ButtonLabels,
-  TimeLimit};
+  TimeLimit,
+  PeriodsTime};

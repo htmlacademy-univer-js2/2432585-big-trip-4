@@ -46,7 +46,7 @@ export default class PointsModel extends Observable {
     }
   }
 
-  addPoint = async (updateType, update) => {
+  async addPoint(updateType, update) {
     try {
       const response = await this.#pointsApiService.addPoint(update);
       const newPoint = this.#adaptToClient(response);
@@ -57,7 +57,7 @@ export default class PointsModel extends Observable {
     }
   };
 
-  deletePoint = async (updateType, update) => {
+  async deletePoint(updateType, update) {
     const index = this.#points.findIndex((point) => point.id === update.id);
 
     if (index === -1) {
