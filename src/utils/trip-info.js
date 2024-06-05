@@ -16,7 +16,6 @@ function getInfofromPoints({ points, destinations, offers }) {
     const destination = destinations.find((dest) => dest.id === point.destination).name;
     arrayOfDestinations.push(destination);
     const offersOfCurrentType = offers.find((offer) => offer.type === point.type);
-    console.log('offersOfCurrentType', offersOfCurrentType)
     offersOfCurrentType.offers.forEach((offer) => {
       if (point.offers.includes(offer.id)) {
         totalPrice += offer.price;

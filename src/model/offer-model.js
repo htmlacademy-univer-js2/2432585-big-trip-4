@@ -19,11 +19,11 @@ export default class OffersModel extends Observable{
   }
 
   async init(){
-      try {
-        this.#allOffers = await this.#offersApiService.offers;
-      } catch (err) {
-        this.#allOffers = [];
-        this._notify(UpdateType.INIT);
-      }
+    try {
+      this.#allOffers = await this.#offersApiService.offers;
+    } catch (err) {
+      this.#allOffers = [];
+      this._notify(UpdateType.INIT);
     }
+  }
 }

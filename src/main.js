@@ -1,11 +1,10 @@
-import TripInfoView from './view/trip-info-view.js';
 import NewPointButtonView from './view/new-point-button-view.js';
 
 import TripPresenter from './presenter/trip-presenter.js';
 import FilterPresenter from './presenter/filter-presenter.js';
 import TripInfoPresenter from './presenter/trip-info-presenter.js';
 
-import { render, RenderPosition } from './framework/render.js';
+import { render } from './framework/render.js';
 
 import PointsModel from './model/point-model.js';
 import DestinationModel from './model/destination-model.js';
@@ -13,15 +12,14 @@ import OffersModel from './model/offer-model.js';
 import FilterModel from './model/filter-model.js';
 
 import PointsApiService from './api-service/points-api-service.js';
-import DestinationsApiService from './api-service/destinations-api-server.js'
-import OffersApiService from './api-service/offers-api-server.js'
+import DestinationsApiService from './api-service/destinations-api-server.js';
+import OffersApiService from './api-service/offers-api-server.js';
 
 import { AUTHORIZATION, END_POINT } from './const.js';
 
 const siteMainElement = document.querySelector('.page-main');
 const tripInfoElement = document.querySelector('.trip-main');
 const filterElement = tripInfoElement.querySelector('.trip-controls__filters');
-//const eventListElement = tripInfoElement.querySelector('.trip-events');
 
 const pointsModel = new PointsModel({
   pointsApiService: new PointsApiService(END_POINT, AUTHORIZATION)

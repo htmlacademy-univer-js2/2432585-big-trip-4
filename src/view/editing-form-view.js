@@ -125,7 +125,7 @@ export default class EditPointView extends AbstractStatefulView {
         //offers: checkedOffers.map((element) => element.dataset.offerId)
         offers: checkedOffers,
       }
-    });
+    })
   };
 
   #priceChangeHandler = (evt) => {

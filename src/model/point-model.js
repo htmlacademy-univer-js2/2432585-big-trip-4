@@ -55,7 +55,7 @@ export default class PointsModel extends Observable {
     } catch (err) {
       throw new Error('Can\'t add point');
     }
-  };
+  }
 
   async deletePoint(updateType, update) {
     const index = this.#points.findIndex((point) => point.id === update.id);
@@ -74,7 +74,7 @@ export default class PointsModel extends Observable {
     } catch (err) {
       throw new Error('Can\'t delete point');
     }
-  };
+  }
 
   #adaptToClient = (point) => {
     const adaptedPoint = {

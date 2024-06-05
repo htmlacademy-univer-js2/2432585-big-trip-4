@@ -10,7 +10,7 @@ function createOffers({ currentOffers, offers }) {
         <span class="event__offer-price">${offer.price}</span>
       </li>
     `).join('')}
-    </ul>`
+    </ul>`;
 }
 
 function createListPointsTemplate({ point, destinations, currentOffers }) {

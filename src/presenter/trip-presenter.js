@@ -76,6 +76,7 @@ export default class TripPresenter {
         break;
       case SortType.PRICE:
         filteredPoints.sort(sortPointsByPrice);
+        break;
       case SortType.DAY:
         filteredPoints.sort(sortPointsByDay);
     }
@@ -146,7 +147,6 @@ export default class TripPresenter {
   }
 
   #renderBoard = () => {
-    console.log('Rendering board');
     const points = this.points;
     const pointsCount = points.length;
 
@@ -154,7 +154,8 @@ export default class TripPresenter {
       if (!pointsCount) {
         this.#renderNoPoints();
         return;
-    }}
+      }
+    }
 
     if (this.#isLoading) {
       this.#renderLoading();
