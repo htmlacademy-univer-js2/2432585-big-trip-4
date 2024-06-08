@@ -91,12 +91,12 @@ export default class EditPointView extends AbstractStatefulView {
   };
 
   #formSubmitHandler = (evt) => {
-    evt.preventDefalt();
+    evt.preventDefault();
     this.#handleSubmitClick(EditPointView.parseStateToPoint(this._state));
   };
 
   #resetClickHandler = (evt) => {
-    evt.preventDefalt();
+    evt.preventDefault();
     this.#handleResetClick(EditPointView.parseStateToPoint(this._state));
   };
 
