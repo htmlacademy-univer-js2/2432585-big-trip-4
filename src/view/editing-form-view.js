@@ -56,7 +56,7 @@ export default class EditPointView extends AbstractStatefulView {
     }
   };
 
-  reset = ({point}) => { this.updateElement(EditPointView.parsePointToState({point}),);};
+  reset = (point) => { this.updateElement(EditPointView.parsePointToState(point),);};
 
   _restoreHandlers = () => {
     this.element
@@ -88,6 +88,7 @@ export default class EditPointView extends AbstractStatefulView {
       .addEventListener('click', this.#deleteClickHandler);
 
     this.#setDatepickers();
+    this.#detectedSaveButtonState();
   };
 
   #formSubmitHandler = (evt) => {
@@ -116,23 +117,26 @@ export default class EditPointView extends AbstractStatefulView {
   };
 
   #offerChangeHandler = () => {
-    const checkedOffers = Array.from(this.element.querySelectorAll('.event__offer-checkbox:checked'))
-      .map(({ id }) => id.split('-').slice(3).join('-'));
+    const checkedOffers = Array.from(this.element.querySelectorAll('.event__offer-checkbox:checked'));
     this._setState({
       point: {
         ...this._state.point,
-        offers: checkedOffers,
+        offers: checkedOffers.map((element) => element.dataset.offerId)
       }
     });
   };
 
   #priceChangeHandler = (evt) => {
+    const priceElement = this.element.querySelector('.event__input--price');
+
     this._setState({
       point: {
         ...this._state.point,
         basePrice: evt.target.value
       }
     });
+
+    priceElement.addEventListener('change', this.#detectedSaveButtonState);
   };
 
   #destinationChangeHandler = (evt) => {
@@ -198,7 +202,25 @@ export default class EditPointView extends AbstractStatefulView {
         minDate: this._state.point.dateFrom,
       },
     );
+
+    dateFromElement.addEventListener('change', this.#detectedSaveButtonState);
+    dateToElement.addEventListener('change', this.#detectedSaveButtonState);
   };
+
+  #detectedSaveButtonState = () => {
+    const destinationElement = this.element.querySelector('#event-destination-1');
+    const dateFromElement = this.element.querySelector('#event-start-time-1');
+    const dateToElement = this.element.querySelector('#event-end-time-1');
+    const priceElement = this.element.querySelector('#event-price-1');
+    const saveButton = this.element.querySelector('.event__save-btn');
+
+    if (!destinationElement.value|| dateFromElement.value === dateToElement.value || priceElement.value <= 0
+      || !dateFromElement.value || !dateToElement.value) {
+        saveButton.disabled = true;
+    } else {
+      saveButton.disabled = false;
+    }
+  }
 
   static parsePointToState = (point) => ({
     ...point,

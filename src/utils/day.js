@@ -28,9 +28,9 @@ function formatStringToTime(date) {
 function getDateDiff(dateFrom, dateTo) {
   const diff = dayjs(dateTo).diff(dayjs(dateFrom));
 
-  if (diff > PeriodsTime.MSEC_IN_DAY) {
+  if (diff >= PeriodsTime.MSEC_IN_DAY) {
     return dayjs.duration(diff).format('DD[D] HH[H] mm[M]');
-  } else if (diff > PeriodsTime.MSEC_IN_HOUR) {
+  } else if (diff >= PeriodsTime.MSEC_IN_HOUR) {
     return dayjs.duration(diff).format('HH[H] mm[M]');
   }
 

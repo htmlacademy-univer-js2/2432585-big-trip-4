@@ -71,7 +71,7 @@ function createRollupButton(isDisabled) {
     </button>`;
 }
 
-function createControlsButtonsTemplate({ pointType, isSaving, isDeleting, isDisabled }) {
+function createButtonsTemplate({ pointType, isSaving, isDeleting, isDisabled }) {
   return `${createSaveButtonTemplate({ isSaving, isDisabled })}
         ${createResetButtonTemplate({ pointType, isDeleting, isDisabled })}
         ${pointType === EditingType.UPDATE ? createRollupButton(isDisabled) : ''}`;
@@ -125,7 +125,7 @@ function createEditPointTemplate({state, pointDestinations, pointOffers, pointTy
           </label>
           <input class="event__input  event__input--price" id="event-price-1" type="number" name="event-price" value="${he.encode(String(basePrice))}" ${isDisabled ? 'disabled' : ''}>
         </div>
-        ${createControlsButtonsTemplate({ pointType, isSaving, isDeleting, isDisabled })}
+        ${createButtonsTemplate({ pointType, isSaving, isDeleting, isDisabled })}
       </header>
       <section class="event__details">
         <section class="event__section  event__section--offers">
