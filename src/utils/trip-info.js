@@ -9,12 +9,15 @@ function getInfofromPoints({ points, destinations, offers }) {
       totalPrice: 0
     };
   }
+
   const sortedPoints = [...points.sort(sortPointsByDay)];
   const arrayOfDestinations = [];
   let totalPrice = 0;
+
   sortedPoints.forEach((point) => {
     const destination = destinations.find((dest) => dest.id === point.destination).name;
     arrayOfDestinations.push(destination);
+
     const offersOfCurrentType = offers.find((offer) => offer.type === point.type);
     offersOfCurrentType.offers.forEach((offer) => {
       if (point.offers.includes(offer.id)) {
@@ -33,6 +36,7 @@ function getInfofromPoints({ points, destinations, offers }) {
 
 function createViewOfPath(destinations) {
   let pathTrip = '';
+
   if (destinations.length <= 3) {
     destinations.forEach((destination, index) => {
       if (index !== destinations.length - 1) {
@@ -44,6 +48,7 @@ function createViewOfPath(destinations) {
   } else {
     pathTrip = `${destinations[0]} &mdash; ... &mdash; ${destinations[destinations.length - 1]}`;
   }
+  
   return pathTrip;
 }
 

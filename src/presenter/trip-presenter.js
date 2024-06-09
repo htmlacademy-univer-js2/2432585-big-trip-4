@@ -102,12 +102,10 @@ export default class TripPresenter {
     this.#noPointsComponent = new EventListEmptyView({
       filterType: this.#filterType,
     });
-    //render(this.#noPointsComponent, this.#listComponent.element, RenderPosition.AFTERBEGIN);
     render(this.#noPointsComponent, this.#listContainer);
   };
 
   #renderLoading() {
-    //render(this.#loadingComponent, this.#listComponent.element, RenderPosition.AFTERBEGIN);
     render(this.#loadingComponent, this.#listContainer);
   }
 
@@ -142,7 +140,6 @@ export default class TripPresenter {
       onSortTypeChange: this.#handleSortTypeChange
     });
 
-    //render(this.#sortComponent, this.#listComponent.element, RenderPosition.AFTERBEGIN);
     render(this.#sortComponent, this.#listContainer, RenderPosition.AFTERBEGIN);
   }
 

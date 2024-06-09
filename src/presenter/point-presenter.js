@@ -3,7 +3,6 @@ import { remove, render, replace } from '../framework/render';
 import ListPointsView from '../view/list-points-view';
 import EditPointView from '../view/editing-form-view';
 
-//import { Mode } from '../const';
 import { UserAction, UpdateType } from '../const';
 import { isDatesEqual, isPriceEqual } from '../utils/points';
 
@@ -28,9 +27,9 @@ export default class PointPresenter {
   #mode = Mode.DEFAULT;
 
   constructor({ pointListContainer, destinationsModel, offersModel, onDataChange, onModeChange }) {
-    /* if (!pointListContainer || !pointListContainer instanceof Element) {
+    if (!pointListContainer || !pointListContainer instanceof Element) {
       throw new Error('Invalid pointListContainer or its element');
-    } */
+    }
 
     this.#pointListContainer = pointListContainer;
     this.#destinationsModel = destinationsModel;

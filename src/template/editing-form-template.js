@@ -79,8 +79,7 @@ function createControlsButtonsTemplate({ pointType, isSaving, isDeleting, isDisa
 
 function createEditPointTemplate({state, pointDestinations, pointOffers, pointType}) {
   const { point, isDisabled, isSaving, isDeleting } = state;
-  //const { id, price, dateFrom, dateTo, offers, type } = point;
-  const { type, dateFrom, dateTo, basePrice, /* destination, */ offers } = state.point;
+  const { type, dateFrom, dateTo, basePrice, offers } = state.point;
 
   const currentDestination = pointDestinations.find((destination) => destination.id === state.point.destination);
   const currentOffers = pointOffers.find((offer) => offer.type === state.point.type);

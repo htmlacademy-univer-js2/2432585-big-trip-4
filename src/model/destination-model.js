@@ -5,7 +5,7 @@ export default class DestinationModel extends Observable{
   #destination = [];
   #destinationsApiService = null;
 
-  constructor({destinationsApiService}) {
+  constructor({ destinationsApiService }) {
     super();
     this.#destinationsApiService = destinationsApiService;
   }
@@ -22,15 +22,6 @@ export default class DestinationModel extends Observable{
   get destinations() {
     return this.#destination;
   }
-
-  /* getDestinationByType(type) {
-    const destination = this.#destination.find((dest) => dest.type === type);
-
-    if (destination) {
-      return destination.destination;
-    }
-    return null;
-  } */
 
   getDestinationById(id) {
     return this.#destination.find((dest) => dest.id === id);

@@ -33,11 +33,6 @@ const FilterType = {
   PAST: 'past'
 };
 
-/* const Mode = {
-  DEFAULT: 'DEFAULT',
-  EDITING: 'EDITING',
-}; */
-
 const SortType = {
   DAY: 'day',
   TIME: 'time',
@@ -94,7 +89,6 @@ export {POINT_EMPTY,
   END_POINT,
   POINT_TYPE,
   FilterType,
-  /* Mode, */
   SortType,
   UserAction,
   EditingType,

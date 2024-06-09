@@ -58,7 +58,7 @@ export default class NewPointPresenter {
     this.#pointEditComponent.shake(resetFormState);
   }
 
-  destroy({isCanceled = true} = {}) {
+  destroy({ isCanceled = true } = {}) {
     if (!this.#pointEditComponent) {
       return;
     }
@@ -67,7 +67,7 @@ export default class NewPointPresenter {
     this.#pointEditComponent = null;
 
     document.removeEventListener('keydown', this.#escKeyDownHandler);
-    this.#handleDestroy({isCanceled});
+    this.#handleDestroy({ isCanceled });
   }
 
   #handleFormSubmit = (point) => {
@@ -76,7 +76,6 @@ export default class NewPointPresenter {
       UpdateType.MINOR,
       point,
     );
-    //this.destroy();
   };
 
   #handleDeleteClick = () => {
