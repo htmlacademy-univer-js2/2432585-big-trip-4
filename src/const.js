@@ -77,13 +77,6 @@ const TimeLimit = {
   UPPER_LIMIT: 1000,
 };
 
-const PeriodsTime = {
-  MINS_IN_HOUR: 60,
-  HOURS_IN_DAY : 24,
-  MINS_IN_DAY : 60 * 24,
-  DAY_IN_MONTH : 31
-};
-
 export {POINT_EMPTY,
   AUTHORIZATION,
   END_POINT,
@@ -95,5 +88,4 @@ export {POINT_EMPTY,
   UpdateType,
   Method,
   ButtonLabels,
-  TimeLimit,
-  PeriodsTime};
+  TimeLimit};
