@@ -1,4 +1,4 @@
-const DEFAULT_TYPE = 'taxi';
+const DEFAULT_TYPE = 'flight';
 
 const AUTHORIZATION = 'Basic moLfy87osjm1dqP';
 const END_POINT = 'https://21.objects.htmlacademy.pro/big-trip';
