@@ -13,12 +13,12 @@ function createPointType({ currentType, isDisabled }) {
 function createPointOffer({ offers, currentOffers, isDisabled }) {
   return currentOffers.offers?.map((offer) => `
     <div class="event__offer-selector">
-      <input class="event__offer-checkbox  visually-hidden" data-offer-id="${offer.id}"
-        id="event-offer-${offer.id}-1" type="checkbox" name="event-offer-${offer.id}" ${offers.includes(offer.id) ? 'checked' : ''} ${isDisabled ? 'disabled' : ''}>
-        <label class="event__offer-label" for="event-offer-${offer.id}">
-        <span class="event__offer-title">${offer.title}</span>
+      <input class="event__offer-checkbox  visually-hidden" ${isDisabled ? "disabled" : ""} data-offer-id="${offer.id}"
+        id="event-offer-${he.encode(offer.id)}-1" type="checkbox" name="event-offer-${he.encode(offer.title)}" ${offers.includes(offer.id) ? 'checked' : ''}>
+        <label class="event__offer-label" for="event-offer-${he.encode(offer.id)}">
+        <span class="event__offer-title">${he.encode(offer.title)}</span>
           &plus;&euro;&nbsp;
-        <span class="event__offer-price">${offer.price}</span>
+        <span class="event__offer-price">${he.encode(String(offer.price))}</span>
        </label>
     </div>`).join('');
 }
@@ -79,10 +79,10 @@ function createButtonsTemplate({ pointType, isSaving, isDeleting, isDisabled }) 
 
 function createEditPointTemplate({state, pointDestinations, pointOffers, pointType}) {
   const { point, isDisabled, isSaving, isDeleting } = state;
-  const { type, dateFrom, dateTo, basePrice, offers } = state.point;
+  const { dateFrom, dateTo, basePrice, offers, type } = point;
 
-  const currentDestination = pointDestinations.find((destination) => destination.id === state.point.destination);
-  const currentOffers = pointOffers.find((offer) => offer.type === state.point.type);
+  const currentDestination = pointDestinations.find((destination) => destination.id === point.destination);
+  const currentOffers = pointOffers.find((offer) => offer.type === point.type);
   const destinationName = (currentDestination) ? currentDestination.name : '';
 
   return (`
@@ -128,11 +128,15 @@ function createEditPointTemplate({state, pointDestinations, pointOffers, pointTy
         ${createButtonsTemplate({ pointType, isSaving, isDeleting, isDisabled })}
       </header>
       <section class="event__details">
+      ${currentOffers.offers.length ? `
         <section class="event__section  event__section--offers">
           <h3 class="event__section-title  event__section-title--offers">Offers</h3>
-          ${createPointOffer({ offers, currentOffers, isDisabled })}
-        </section>
-        ${currentDestination ? `<section class="event__section  event__section--destination">
+
+          <div class="event__available-offers">
+            ${createPointOffer({ offers, currentOffers, isDisabled })}
+          </div>
+        </section>` : ''}
+        ${currentDestination?.description && currentDestination?.pictures.length ? `<section class="event__section  event__section--destination">
           ${createDestination(currentDestination)}
         </section>` : ''}
       </section>

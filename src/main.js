@@ -17,7 +17,7 @@ import OffersApiService from './api-service/offers-api-server.js';
 
 import { AUTHORIZATION, END_POINT } from './const.js';
 
-const siteMainElement = document.querySelector('.page-main');
+const siteMainElement = document.querySelector('.trip-events');
 const tripInfoElement = document.querySelector('.trip-main');
 const filterElement = tripInfoElement.querySelector('.trip-controls__filters');
 

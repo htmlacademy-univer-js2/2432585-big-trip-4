@@ -5,7 +5,7 @@ export default class PointsModel extends Observable {
   #pointsApiService = null;
   #points = [];
 
-  constructor({pointsApiService}) {
+  constructor({ pointsApiService }) {
     super();
     this.#pointsApiService = pointsApiService;
   }

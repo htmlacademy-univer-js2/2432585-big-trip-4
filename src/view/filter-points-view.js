@@ -6,7 +6,7 @@ export default class FilterPointsView extends AbstractView {
   #currentFilter = null;
   #handleFilterTypeChange = null;
 
-  constructor({filters, currentFilter, onFilterTypeChange}) {
+  constructor({ filters, currentFilter, onFilterTypeChange }) {
     super();
     this.#filters = filters;
     this.#currentFilter = currentFilter;

@@ -4,7 +4,7 @@ import { createTripInfoTemplate } from '../template/trip-info-template.js';
 export default class TripInfoView extends AbstractView {
   #info = null;
 
-  constructor({info}) {
+  constructor({ info }) {
     super();
     this.#info = info;
   }
