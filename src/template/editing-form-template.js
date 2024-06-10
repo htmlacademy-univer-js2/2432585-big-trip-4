@@ -13,7 +13,7 @@ function createPointType({ currentType, isDisabled }) {
 function createPointOffer({ offers, currentOffers, isDisabled }) {
   return currentOffers.offers?.map((offer) => `
     <div class="event__offer-selector">
-      <input class="event__offer-checkbox  visually-hidden" ${isDisabled ? "disabled" : ""} data-offer-id="${offer.id}"
+      <input class="event__offer-checkbox  visually-hidden" ${isDisabled ? 'disabled' : ''} data-offer-id="${offer.id}"
         id="event-offer-${he.encode(offer.id)}-1" type="checkbox" name="event-offer-${he.encode(offer.title)}" ${offers.includes(offer.id) ? 'checked' : ''}>
         <label class="event__offer-label" for="event-offer-${he.encode(offer.id)}">
         <span class="event__offer-title">${he.encode(offer.title)}</span>

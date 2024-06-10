@@ -214,13 +214,13 @@ export default class EditPointView extends AbstractStatefulView {
     const priceElement = this.element.querySelector('#event-price-1');
     const saveButton = this.element.querySelector('.event__save-btn');
 
-    if (!destinationElement.value|| dateFromElement.value === dateToElement.value || priceElement.value <= 0
+    if (!destinationElement.value || dateFromElement.value === dateToElement.value || priceElement.value <= 0
       || !dateFromElement.value || !dateToElement.value) {
-        saveButton.disabled = true;
+      saveButton.disabled = true;
     } else {
       saveButton.disabled = false;
     }
-  }
+  };
 
   static parsePointToState = (point) => ({
     ...point,

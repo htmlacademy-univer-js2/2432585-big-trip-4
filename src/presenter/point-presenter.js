@@ -27,7 +27,7 @@ export default class PointPresenter {
   #mode = Mode.DEFAULT;
 
   constructor({ pointListContainer, destinationsModel, offersModel, onDataChange, onModeChange }) {
-    if (!pointListContainer || !pointListContainer instanceof Element) {
+    if ((!pointListContainer || !pointListContainer) instanceof Element) {
       throw new Error('Invalid pointListContainer or its element');
     }
 

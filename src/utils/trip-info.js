@@ -48,7 +48,7 @@ function createViewOfPath(destinations) {
   } else {
     pathTrip = `${destinations[0]} &mdash; ... &mdash; ${destinations[destinations.length - 1]}`;
   }
-  
+
   return pathTrip;
 }
 
