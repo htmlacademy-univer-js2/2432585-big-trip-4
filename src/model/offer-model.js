@@ -1,20 +1,13 @@
 import Observable from '../framework/observable';
+import { UpdateType } from '../const';
 
 export default class OffersModel extends Observable{
   #allOffers = [];
   #offersApiService = null;
 
-  constructor({offersApiService}) {
+  constructor({ offersApiService }) {
     super();
     this.#offersApiService = offersApiService;
-  }
-
-  async init(){
-    try {
-      this.#allOffers = await this.#offersApiService.offers;
-    } catch (err) {
-      this.#allOffers = [];
-    }
   }
 
   get allOffers() {
@@ -25,12 +18,12 @@ export default class OffersModel extends Observable{
     return this.#allOffers.find((offer) => offer.type === type);
   }
 
-  /* getById() {
-    return this.allOffers.forEach((element) => {
-      const result = element.offers.find((offer) => offer.id === id);
-      if (result) {
-        return result;
-      }
-    });
-  } */
+  async init(){
+    try {
+      this.#allOffers = await this.#offersApiService.offers;
+    } catch (err) {
+      this.#allOffers = [];
+      this._notify(UpdateType.INIT);
+    }
+  }
 }

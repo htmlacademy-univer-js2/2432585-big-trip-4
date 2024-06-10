@@ -2,18 +2,14 @@ import AbstractView from '../framework/view/abstract-view.js';
 import { createTripInfoTemplate } from '../template/trip-info-template.js';
 
 export default class TripInfoView extends AbstractView {
-  #destinations = null;
-  #offers = null;
-  #points = 0;
+  #info = null;
 
-  constructor({destinations, offers, points}) {
+  constructor({ info }) {
     super();
-    this.#destinations = destinations;
-    this.#offers = offers;
-    this.#points = points;
+    this.#info = info;
   }
 
   get template() {
-    return createTripInfoTemplate(this.#points, this.#destinations, this.#offers);
+    return createTripInfoTemplate(this.#info);
   }
 }

@@ -1,10 +1,11 @@
 import Observable from '../framework/observable';
+import { UpdateType } from '../const';
 
 export default class DestinationModel extends Observable{
   #destination = [];
   #destinationsApiService = null;
 
-  constructor({destinationsApiService}) {
+  constructor({ destinationsApiService }) {
     super();
     this.#destinationsApiService = destinationsApiService;
   }
@@ -14,20 +15,12 @@ export default class DestinationModel extends Observable{
       this.#destination = await this.#destinationsApiService.destinations;
     } catch (err) {
       this.#destination = [];
+      this._notify(UpdateType.INIT);
     }
   }
 
   get destinations() {
     return this.#destination;
-  }
-
-  getDestinationByType(type) {
-    const destination = this.#destination.find((dest) => dest.type === type);
-
-    if (destination) {
-      return destination.destination;
-    }
-    return null;
   }
 
   getDestinationById(id) {

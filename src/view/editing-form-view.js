@@ -1,6 +1,6 @@
 import AbstractStatefulView from '../framework/view/abstract-stateful-view.js';
 import { createEditPointTemplate } from '../template/editing-form-template.js';
-import { POINT_EMPTY } from '../const.js';
+import { POINT_EMPTY, EditingType } from '../const.js';
 
 import dayjs from 'dayjs';
 
@@ -10,16 +10,20 @@ import 'flatpickr/dist/flatpickr.min.css';
 export default class EditPointView extends AbstractStatefulView {
   #pointDestinations = null;
   #pointOffers = null;
+  #type = null;
+
   #handleResetClick = null;
   #handleSubmitClick = null;
   #handlePointDelete = null;
+
   #datepickerFrom = null;
   #datepickerTo = null;
 
-  constructor({point = POINT_EMPTY, pointDestinations, pointOffers, onResetClick, onSubmitClick, onDeleteClick}) {
+  constructor({point = POINT_EMPTY, pointDestinations, pointOffers, onResetClick, onSubmitClick, onDeleteClick, type = EditingType.UPDATE}) {
     super();
     this.#pointDestinations = pointDestinations;
     this.#pointOffers = pointOffers;
+    this.#type = type;
     this.#handleResetClick = onResetClick;
     this.#handleSubmitClick = onSubmitClick;
     this.#handlePointDelete = onDeleteClick;
@@ -33,7 +37,8 @@ export default class EditPointView extends AbstractStatefulView {
     return createEditPointTemplate({
       state: this._state,
       pointDestinations: this.#pointDestinations,
-      pointOffers: this.#pointOffers
+      pointOffers: this.#pointOffers,
+      pointType: this.#type,
     });
   }
 
@@ -51,11 +56,7 @@ export default class EditPointView extends AbstractStatefulView {
     }
   };
 
-  reset({point}) {
-    this.updateElement(
-      EditPointView.parsePointToState({point}),
-    );
-  }
+  reset = (point) => { this.updateElement(EditPointView.parsePointToState(point),);};
 
   _restoreHandlers = () => {
     this.element
@@ -64,7 +65,7 @@ export default class EditPointView extends AbstractStatefulView {
 
     this.element
       .querySelector('.event__rollup-btn')
-      ?.addEventListener('click', this.#resetButtonClickHandler);
+      ?.addEventListener('click', this.#resetClickHandler);
 
     this.element
       .querySelector('.event__type-group')
@@ -72,7 +73,7 @@ export default class EditPointView extends AbstractStatefulView {
 
     this.element
       .querySelector('.event__available-offers')
-      .addEventListener('change', this.#offerChangeHandler);
+      ?.addEventListener('change', this.#offerChangeHandler);
 
     this.element
       .querySelector('.event__input--price')
@@ -87,15 +88,16 @@ export default class EditPointView extends AbstractStatefulView {
       .addEventListener('click', this.#deleteClickHandler);
 
     this.#setDatepickers();
+    this.#detectedSaveButtonState();
   };
 
   #formSubmitHandler = (evt) => {
-    evt.preventDefalt();
+    evt.preventDefault();
     this.#handleSubmitClick(EditPointView.parseStateToPoint(this._state));
   };
 
-  #resetButtonClickHandler = (evt) => {
-    evt.preventDefalt();
+  #resetClickHandler = (evt) => {
+    evt.preventDefault();
     this.#handleResetClick(EditPointView.parseStateToPoint(this._state));
   };
 
@@ -108,8 +110,8 @@ export default class EditPointView extends AbstractStatefulView {
     this.updateElement( {
       point: {
         ...this._state.point,
+        type: evt.target.value,
         offers: [],
-        type: evt.target.value
       }
     });
   };
@@ -125,12 +127,16 @@ export default class EditPointView extends AbstractStatefulView {
   };
 
   #priceChangeHandler = (evt) => {
+    const priceElement = this.element.querySelector('.event__input--price');
+
     this._setState({
       point: {
         ...this._state.point,
-        basePrice: evt.target.valueAsNumber
+        basePrice: evt.target.value
       }
     });
+
+    priceElement.addEventListener('change', this.#detectedSaveButtonState);
   };
 
   #destinationChangeHandler = (evt) => {
@@ -196,6 +202,24 @@ export default class EditPointView extends AbstractStatefulView {
         minDate: this._state.point.dateFrom,
       },
     );
+
+    dateFromElement.addEventListener('change', this.#detectedSaveButtonState);
+    dateToElement.addEventListener('change', this.#detectedSaveButtonState);
+  };
+
+  #detectedSaveButtonState = () => {
+    const destinationElement = this.element.querySelector('#event-destination-1');
+    const dateFromElement = this.element.querySelector('#event-start-time-1');
+    const dateToElement = this.element.querySelector('#event-end-time-1');
+    const priceElement = this.element.querySelector('#event-price-1');
+    const saveButton = this.element.querySelector('.event__save-btn');
+
+    if (!destinationElement.value || dateFromElement.value === dateToElement.value || priceElement.value <= 0
+      || !dateFromElement.value || !dateToElement.value) {
+      saveButton.disabled = true;
+    } else {
+      saveButton.disabled = false;
+    }
   };
 
   static parsePointToState = (point) => ({
