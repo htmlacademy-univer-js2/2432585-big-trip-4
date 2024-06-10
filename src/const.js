@@ -1,6 +1,6 @@
-const DEFAULT_TYPE = 'taxi';
+const DEFAULT_TYPE = 'flight';
 
-const AUTHORIZATION = 'Basic mofy87osm1d';
+const AUTHORIZATION = 'Basic moLfy87osjm1dqP';
 const END_POINT = 'https://21.objects.htmlacademy.pro/big-trip';
 
 //пустая точка
@@ -31,11 +31,6 @@ const FilterType = {
   FUTURE: 'future',
   PRESENT: 'present',
   PAST: 'past'
-};
-
-const Mode = {
-  DEFAULT: 'DEFAULT',
-  EDITING: 'EDITING',
 };
 
 const SortType = {
@@ -87,7 +82,6 @@ export {POINT_EMPTY,
   END_POINT,
   POINT_TYPE,
   FilterType,
-  Mode,
   SortType,
   UserAction,
   EditingType,

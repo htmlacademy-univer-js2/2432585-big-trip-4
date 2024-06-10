@@ -4,7 +4,7 @@ import { createEmptyListPointsTemplate } from '../template/event-list-empty-temp
 export default class EventListEmptyView extends AbstractView {
   #filterType = null;
 
-  constructor({filterType}) {
+  constructor({ filterType }) {
     super();
     this.#filterType = filterType;
   }

@@ -5,7 +5,7 @@ export default class PointsModel extends Observable {
   #pointsApiService = null;
   #points = [];
 
-  constructor({pointsApiService}) {
+  constructor({ pointsApiService }) {
     super();
     this.#pointsApiService = pointsApiService;
   }
@@ -46,7 +46,7 @@ export default class PointsModel extends Observable {
     }
   }
 
-  addPoint = async (updateType, update) => {
+  async addPoint(updateType, update) {
     try {
       const response = await this.#pointsApiService.addPoint(update);
       const newPoint = this.#adaptToClient(response);
@@ -55,9 +55,9 @@ export default class PointsModel extends Observable {
     } catch (err) {
       throw new Error('Can\'t add point');
     }
-  };
+  }
 
-  deletePoint = async (updateType, update) => {
+  async deletePoint(updateType, update) {
     const index = this.#points.findIndex((point) => point.id === update.id);
 
     if (index === -1) {
@@ -74,7 +74,7 @@ export default class PointsModel extends Observable {
     } catch (err) {
       throw new Error('Can\'t delete point');
     }
-  };
+  }
 
   #adaptToClient = (point) => {
     const adaptedPoint = {
