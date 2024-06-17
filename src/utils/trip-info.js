@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import { sortPointsByDay } from '../utils/points';
 
-function getInfofromPoints({ points, destinations, offers }) {
+function getInfoFromPoints({ points, destinations, offers }) {
   if (!points || !destinations || !offers) {
     return {
       destinationsString: '',
@@ -11,12 +11,12 @@ function getInfofromPoints({ points, destinations, offers }) {
   }
 
   const sortedPoints = [...points.sort(sortPointsByDay)];
-  const arrayOfDestinations = [];
+  const destinationsList = [];
   let totalPrice = 0;
 
   sortedPoints.forEach((point) => {
     const destination = destinations.find((dest) => dest.id === point.destination).name;
-    arrayOfDestinations.push(destination);
+    destinationsList.push(destination);
 
     const offersOfCurrentType = offers.find((offer) => offer.type === point.type);
     offersOfCurrentType.offers.forEach((offer) => {
@@ -28,7 +28,7 @@ function getInfofromPoints({ points, destinations, offers }) {
   });
 
   return {
-    destinationsString: createViewOfPath(arrayOfDestinations),
+    destinationsString: createViewOfPath(destinationsList),
     datesString: createViewOfDates(sortedPoints[0]?.dateFrom, sortedPoints[sortedPoints.length - 1]?.dateTo),
     totalPrice: `&euro;&nbsp;${totalPrice}`
   };
@@ -56,4 +56,4 @@ function createViewOfDates(dateA, dateB) {
   return dateA && dateB ? `${dayjs(dateA).format('D MMM').toUpperCase()}&nbsp;&mdash;&nbsp;${dayjs(dateB).format('D MMM').toUpperCase()}` : '';
 }
 
-export { getInfofromPoints };
+export { getInfoFromPoints };

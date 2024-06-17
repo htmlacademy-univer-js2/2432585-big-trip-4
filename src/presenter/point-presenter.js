@@ -89,10 +89,12 @@ export default class PointPresenter {
   }
 
   setDeleting() {
-    this.#pointEditComponent.updateElement({
-      isDisabled: true,
-      isDeleting: true
-    });
+    if (this.#mode === Mode.EDITING){
+      this.#pointEditComponent.updateElement({
+        isDisabled: true,
+        isDeleting: true
+      });
+    }
   }
 
   setAborting() {
@@ -123,14 +125,6 @@ export default class PointPresenter {
     }
   }
 
-  #escKeyDownHandler = (evt) => {
-    if (evt.key === 'Escape' || evt.key === 'Esc') {
-      evt.preventDefault();
-      this.#pointEditComponent.reset(this.#point);
-      this.#replaceEditToPoint();
-    }
-  };
-
   #replacePointToEdit() {
     replace(this.#pointEditComponent, this.#pointComponent);
     document.addEventListener('keydown', this.#escKeyDownHandler);
@@ -144,6 +138,14 @@ export default class PointPresenter {
     document.removeEventListener('keydown', this.#escKeyDownHandler);
     this.#mode = Mode.DEFAULT;
   }
+
+  #escKeyDownHandler = (evt) => {
+      if (evt.key === 'Escape' || evt.key === 'Esc') {
+        evt.preventDefault();
+        this.#pointEditComponent.reset(this.#point);
+        this.#replaceEditToPoint();
+      }
+    };
 
   #handleFormSubmit = (update) => {
     const isMinorUpdate =

@@ -1,6 +1,6 @@
 import { RenderPosition, remove, render, replace } from '../framework/render';
 import TripInfoView from '../view/trip-info-view';
-import { getInfofromPoints } from '../utils/trip-info';
+import { getInfoFromPoints } from '../utils/trip-info';
 
 export default class TripInfoPresenter {
   #tripInfoComponent = null;
@@ -30,7 +30,7 @@ export default class TripInfoPresenter {
     const destinations = this.#destinationModel.destinations;
     const offers = this.#offersModel.allOffers;
 
-    this.#tripInfoComponent = new TripInfoView({ info: getInfofromPoints({ points, destinations, offers }) });
+    this.#tripInfoComponent = new TripInfoView({ info: getInfoFromPoints({ points, destinations, offers }) });
 
     if (!prevTripInfoComponent) {
       render(
