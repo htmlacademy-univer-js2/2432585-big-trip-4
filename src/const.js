@@ -14,7 +14,7 @@ const POINT_EMPTY = {
   type: DEFAULT_TYPE
 };
 
-const POINT_TYPE = [
+const pointTypes = [
   'Taxi',
   'Bus',
   'Train',
@@ -80,7 +80,7 @@ const TimeLimit = {
 export {POINT_EMPTY,
   AUTHORIZATION,
   END_POINT,
-  POINT_TYPE,
+  pointTypes,
   FilterType,
   SortType,
   UserAction,

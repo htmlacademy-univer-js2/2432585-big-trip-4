@@ -3,7 +3,7 @@ import he from 'he';
 
 function createOffers({ currentOffers, offers }) {
   return `<ul class="event__selected-offers">
-    ${currentOffers.offers.filter((offer) => offers.includes(offer.id)).map((offer) => `
+    ${currentOffers.filter((offer) => offers.includes(offer.id)).map((offer) => `
       <li class="event__offer">
         <span class="event__offer-title">${offer.title}</span>
         &plus;&euro;&nbsp;

@@ -202,17 +202,17 @@ export default class TripPresenter {
       case UserAction.ADD_POINT:
         try {
           this.#newPointPresenter.setSaving();
-          await this.#pointsModel.addPoint(updateType, update.point);
+          await this.#pointsModel.addPoint(updateType, update);
         } catch (err) {
           this.#newPointPresenter.setAborting();
         }
         break;
       case UserAction.DELETE_POINT:
         try {
-          this.#pointPresenters.get(update.point.id).setDeleting();
-          await this.#pointsModel.deletePoint(updateType, update.point);
+          this.#pointPresenters.get(update.id).setDeleting();
+          await this.#pointsModel.deletePoint(updateType, update);
         } catch (err) {
-          this.#pointPresenters.get(update.point.id).setAborting();
+          this.#pointPresenters.get(update.id).setAborting();
         }
         break;
     }
@@ -220,7 +220,7 @@ export default class TripPresenter {
     this.#uiBlocker.unblock();
   };
 
-  #clearBoard = ({resetSortType = false} = {}) => {
+  #clearBoard = ({ resetSortType = false } = {}) => {
     this.#newPointPresenter.destroy();
     this.#pointPresenters.forEach((presenter) => presenter.destroy());
     this.#pointPresenters.clear();
@@ -248,7 +248,7 @@ export default class TripPresenter {
         this.#renderBoard();
         break;
       case UpdateType.MAJOR:
-        this.#clearBoard({resetSortType: true});
+        this.#clearBoard({ resetSortType: true });
         this.#renderBoard();
         break;
       case UpdateType.INIT:

@@ -56,7 +56,7 @@ export default class EditPointView extends AbstractStatefulView {
     }
   };
 
-  reset = (point) => { this.updateElement(EditPointView.parsePointToState(point),);};
+  reset = (point) => { this.updateElement(EditPointView.parsePointToState(point),); };
 
   _restoreHandlers = () => {
     this.element
@@ -98,7 +98,7 @@ export default class EditPointView extends AbstractStatefulView {
 
   #resetClickHandler = (evt) => {
     evt.preventDefault();
-    this.#handleResetClick(EditPointView.parseStateToPoint(this._state));
+    this.#handleResetClick();
   };
 
   #deleteClickHandler = (evt) => {

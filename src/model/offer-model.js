@@ -15,7 +15,7 @@ export default class OffersModel extends Observable{
   }
 
   getOffersByType(type) {
-    return this.#allOffers.find((offer) => offer.type === type);
+    return this.#allOffers.find((offer) => offer.type === type).offers;
   }
 
   async init(){
