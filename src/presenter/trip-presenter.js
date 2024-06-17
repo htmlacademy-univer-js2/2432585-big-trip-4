@@ -18,7 +18,6 @@ export default class TripPresenter {
   #sortComponent = null;
   #noPointsComponent = null;
   #loadingComponent = new LoadingView();
-  #newPointButtonComponent = null;
 
   #listContainer = null;
 
@@ -42,13 +41,12 @@ export default class TripPresenter {
   #pointPresenters = new Map();
   #newPointPresenter = null;
 
-  constructor({ listContainer, pointsModel, destinationsModel, offersModel, filterModel, onNewPointDestroy, newPointButtonComponent }) {
+  constructor({ listContainer, pointsModel, destinationsModel, offersModel, filterModel, onNewPointDestroy }) {
     this.#listContainer = listContainer;
     this.#pointsModel = pointsModel;
     this.#destinationsModel = destinationsModel;
     this.#offersModel = offersModel;
     this.#filterModel = filterModel;
-    this.#newPointButtonComponent = newPointButtonComponent;
     this.#onNewPointDestroy = onNewPointDestroy;
 
     this.#newPointPresenter = new NewPointPresenter({
@@ -183,7 +181,7 @@ export default class TripPresenter {
 
     switch(actionType) {
       case UserAction.UPDATE_POINT:
-        if(update.point){
+        if (update.point) {
           try {
             this.#pointPresenters.get(update.point.id).setSaving();
             await this.#pointsModel.updatePoint(updateType, update.point);
@@ -200,19 +198,37 @@ export default class TripPresenter {
         }
         break;
       case UserAction.ADD_POINT:
-        try {
-          this.#newPointPresenter.setSaving();
-          await this.#pointsModel.addPoint(updateType, update);
-        } catch (err) {
-          this.#newPointPresenter.setAborting();
+        if (update.point) {
+          try {
+            this.#newPointPresenter.setSaving();
+            await this.#pointsModel.addPoint(updateType, update.point);
+          } catch (err) {
+            this.#newPointPresenter.setAborting();
+          }
+        } else {
+          try {
+            this.#newPointPresenter.setSaving();
+            await this.#pointsModel.addPoint(updateType, update);
+          } catch (err) {
+            this.#newPointPresenter.setAborting();
+          }
         }
         break;
       case UserAction.DELETE_POINT:
-        try {
-          this.#pointPresenters.get(update.id).setDeleting();
-          await this.#pointsModel.deletePoint(updateType, update);
-        } catch (err) {
-          this.#pointPresenters.get(update.id).setAborting();
+        if (update.point) {
+          try {
+            this.#pointPresenters.get(update.point.id).setDeleting();
+            await this.#pointsModel.deletePoint(updateType, update.point);
+          } catch (err) {
+            this.#pointPresenters.get(update.point.id).setAborting();
+          }
+        } else {
+          try {
+            this.#pointPresenters.get(update.id).setDeleting();
+            await this.#pointsModel.deletePoint(updateType, update);
+          } catch (err) {
+            this.#pointPresenters.get(update.id).setAborting();
+          }
         }
         break;
     }
