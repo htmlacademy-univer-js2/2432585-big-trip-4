@@ -17,4 +17,4 @@ function createFilterTemplate(filters, currentFilterType){
           </div>`;
 }
 
-export {createFilterTemplate, createFilterItems};
+export {createFilterTemplate};
