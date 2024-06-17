@@ -121,7 +121,7 @@ export default class EditPointView extends AbstractStatefulView {
     this._setState({
       point: {
         ...this._state.point,
-        offers: checkedOffers.map((element)  => element.dataset.offerId)
+        offers: checkedOffers.map((element) => element.dataset.offerId)
       }
     });
   };
